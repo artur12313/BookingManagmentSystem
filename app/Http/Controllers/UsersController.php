@@ -15,26 +15,15 @@ class UsersController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function create() 
+    public function store(Request $request) 
     {
-        return view('users.create');
-    }
-
-    public function store(User $user, Request $request) 
-    {
-        $validated = $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:30',
             'password' => 'required|string|min:8',
             'password_confirmation' => 'required|same:password',
         ]);
-
-        //if validate return false with errors
-        if(!$validated) {
-            return back()->withErrors($validated);
-        }
-
 
         $user = new User;
         $user->name = $request->name;
@@ -46,47 +35,26 @@ class UsersController extends Controller
         return redirect()->route('users.index')->withSuccess(__('Użytkownik utworzony pomyślnie.'));
     }
 
-    /**
-     * Show user data
-     * 
-     * @param User $user
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user) 
+    public function update(Request $request, $id) 
     {
-        return view('users.show', [
-            'user' => $user
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:30',
         ]);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->update();
+
+        return redirect()->route('users.index')->withSuccess(__('Uytkownik zaktualizowany pomyślnie.'));
     }
 
-    /**
-     * Edit user data
-     * 
-     * @param User $user
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user) 
+    public function destroy($id) 
     {
-        return view('users.edit', [
-            'user' => $user,
-        ]);
-    }
-
-    public function update(User $user, UpdateUserRequest $request) 
-    {
-        $user->update($request->validated());
-
-        return redirect()->route('users.index')
-            ->withSuccess(__('User updated successfully.'));
-    }
-
-    public function destroy(User $user) 
-    {
-        $user->delete();
-
-        return redirect()->route('users.index')
-            ->withSuccess(__('User deleted successfully.'));
+        User::destroy($id);
+        return redirect()->route('users.index')->withSuccess(__('Użytkownik usunięty pomyślnie.'));
     }
 }
