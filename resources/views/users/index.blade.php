@@ -69,19 +69,21 @@
             @csrf
             <div class="form-group">
                 <label for="name">Nazwa</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Nazwa">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nazwa" onchange="validateName()" onclick="validateName()" required>
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" onchange="validateEmail()" required>
             </div>
             <div class="form-group">
                 <label for="password">Hasło</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Hasło">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Hasło" onchange="validatePassword()" onclick="validatePassword()" required>
+                <div id="passwordResult"></div>
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Powtórz hasło</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Powtórz hasło">
+                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Powtórz hasło" onchange="comparePasswords()" onclick="comparePasswords()" required>
+                <div id="compareResult"></div>
             </div>
         </div>
         <div class="modal-footer">
@@ -94,4 +96,60 @@
       </div>
     </div>
   </div>
+    <script>
+      function regexEmail(email) {
+        let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        return res.test(email);
+      }
+      function validateEmail() {
+        let emailInput = $("#email");
+        let email = $("#email").val();
+        if(regexEmail(email)) {
+            emailInput.attr('style', "border: 1px solid green; color: green");
+        } else {
+            emailInput.attr('style', "border: 1px solid red; color: red");
+        }
+        return false;
+      }
+
+      function validateName() {
+        let nameInput = $("#name");
+        let name = $("#name").val();
+        if(name == null || name == '') {
+            nameInput.attr('style', "border: 1px solid red; color: red");
+        } else {
+            nameInput.attr('style', "border: 1px solid green; color: green");
+        }
+        return false;
+      }
+
+      function validatePassword() {
+        let passwordInput = $("#password");
+        let password = $("#password").val();
+        let passwordResult = $("#passwordResult");
+        if(password == null || password == '') {
+            passwordInput.attr('style', "border: 1px solid red;");
+            passwordResult.html('<ul style="margin-top: 1rem;"><li>Zalecane małe i wielkie litery</li><li>Zalecana długość przynajmniej 8 znaków</li><li>Zalecane użycie znaków specjalnych</li></ul>');
+        } else {
+            passwordInput.attr('style', "border: 1px solid green; color: green");
+            passwordResult.html('');
+        }
+        return false;
+      }
+
+      function comparePasswords() {
+        let result = $("#compareResult");
+        let password = $("#password").val();
+        let password_confirmation = $("#password_confirmation").val();
+        let password_confirmationInput = $("#password_confirmation");
+        if(password == password_confirmation) {
+            password_confirmationInput.attr('style', "border: 1px solid green; color: green;");
+            result.html('');
+        } else {
+            password_confirmationInput.attr('style', "border: 1px solid red; color: red");
+            result.html('<ul style="margin-top: 1rem;"><li>Hasła nie są identyczne</li></ul>');
+        }
+        return false;
+      }
+    </script>
 @endsection
