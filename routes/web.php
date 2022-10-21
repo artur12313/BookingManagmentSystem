@@ -33,5 +33,6 @@ Route::delete('/users/{id}/delete', [UsersController::class, 'destroy'])->name('
 
 // Profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-
+Route::patch('/profile/{id}/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::patch('/profile/{id}/password', [ProfileController::class, 'password'])->name('profile.password');
 });
