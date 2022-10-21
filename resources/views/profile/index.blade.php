@@ -63,16 +63,16 @@
                         <div class="card-body p-4">
                             <div class="form-group col-6">
                                 <label for="current_password">Obecne Hasło</label>
-                                <input type="password" class="form-control" id="current_password" name="current_password">
+                                <input type="password" class="form-control" id="current_password" name="current_password" required>
                             </div>
                             <div class="form-group col-6">
                                 <label for="password">Nowe Hasło</label>
-                                <input type="password" class="form-control" id="password" name="password" onchange="validatePassword(this)" onchange="validatePassword(this)">
+                                <input type="password" class="form-control" id="password" name="password" onchange="validatePassword(this)" onchange="validatePassword(this)" required>
                                 <div id="passwordResult"></div>
                             </div>
                             <div class="form-group col-6">
                                 <label for="password_confirmation">Potwierdź Hasło</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" onchange="comparePasswords(this)">
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" onchange="comparePasswords(this)" required>
                                 <div id="compareResult"></div>
                             </div>
                         </div>
@@ -86,8 +86,6 @@
     </div>
 </div>
 <script>
-    $('#submitPassword').attr('disabled', true);
-
     function validatePassword(e) {
         let passwordInput = $(e);
         let password = $(e).val();
@@ -117,7 +115,6 @@
         if(password == password_confirmation) {
             password_confirmationInput.attr('style', "border: 1px solid green; color: green;");
             result.html('');
-            $('#submitPassword').attr('disabled', false);
         } else {
             password_confirmationInput.attr('style', "border: 1px solid red; color: red");
             result.html('<ul style="margin-top: 1rem;"><li>Hasła nie są identyczne</li></ul>');
