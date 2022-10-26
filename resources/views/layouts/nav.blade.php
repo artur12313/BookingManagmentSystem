@@ -17,7 +17,7 @@
                     <a class="nav-link px-2 text-white" href="{{ route('users.index') }}">{{ __('Użytkownicy') }}</a>
                 </li>
                 <li>
-                    <a class="nav-link px-2 text-white" href="#">{{ __('Nowa rezerwacja') }}</a>
+                    <a class="nav-link px-2 text-white" href="{{ route('booking.index') }}">{{ __('Nowa rezerwacja') }}</a>
                 </li>
             </ul>
 

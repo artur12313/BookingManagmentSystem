@@ -48,4 +48,7 @@ Route::delete('/categories/{id}/delete', [CategoriesController::class, 'destroy'
 Route::post('/room/create', [RoomController::class, 'store'])->name('room.store');
 Route::patch('/room/{id}/update', [RoomController::class, 'update'])->name('room.update');
 Route::delete('/room/{id}/delete', [RoomController::class, 'destroy'])->name('room.destroy');
+
+//Booking
+Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
 });
