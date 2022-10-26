@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CategoriesController;
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +43,9 @@ Route::get('/categories/{id}', [CategoriesController::class, 'show'])->name('cat
 Route::post('/categories/create', [CategoriesController::class, 'store'])->name('categories.store');
 Route::patch('/categories/{id}/update', [CategoriesController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{id}/delete', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+
+//Rooms
+Route::post('/room/create', [RoomController::class, 'store'])->name('room.store');
+Route::patch('/room/{id}/update', [RoomController::class, 'update'])->name('room.update');
+Route::delete('/room/{id}/delete', [RoomController::class, 'destroy'])->name('room.destroy');
 });

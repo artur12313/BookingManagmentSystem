@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Room extends Model
 {
     use HasFactory, SoftDeletes;
+
+
+    protected $table = 'rooms';
 
     protected $fillable = [
         'name',
     ];
 
-    public function rooms()
+    public function category()
     {
-        return $this->hasMany(Room::class);
+        return $this->belongsTo(Category::class);
     }
 }

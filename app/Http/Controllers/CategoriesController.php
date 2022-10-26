@@ -15,6 +15,14 @@ class CategoriesController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $category = Category::find($id);
+        return view('rooms.show')->with([
+            'category' => $category
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([

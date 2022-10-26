@@ -39,7 +39,7 @@
                         data-target="#editCategory"
                         data-id="{{ $item->id }}"
                         data-name="{{ $item->name }}"
-                        onclick="editCategory(this)"
+                        onclick="edit(this)"
                         >Edytuj</button>
                         <button 
                             type="button"
@@ -127,7 +127,7 @@
   </div>
 
 {{-- END MODAL EDIT CATEGORY --}}
-{{-- MODAL REMOVE USER --}}
+{{-- MODAL REMOVE CATEGORY --}}
 <div class="modal fade" id="categoryRemove" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -152,9 +152,9 @@
     </div>
   </div>
 </div>
-{{-- END MODAL REMOVE USER --}}
+{{-- END MODAL REMOVE CATEGORY --}}
 <script>
-    function editCategory(element) {
+    function edit(element) {
         var id = $(element).data('id');
         var name = $(element).data('name');
         var url = '{{ route("categories.update", ":id") }}';
