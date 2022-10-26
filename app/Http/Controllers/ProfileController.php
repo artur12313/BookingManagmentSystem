@@ -30,7 +30,7 @@ class ProfileController extends Controller
         $user->phone = $request->phone;
         $user->update();
 
-        return redirect()->route('profile.index')->withSuccess(__('Uytkownik zaktualizowany pomyślnie.'));
+        return redirect()->route('profile.index')->withSuccess(__('Użytkownik zaktualizowany pomyślnie.'));
     }
 
     public function password(Request $request, $id)

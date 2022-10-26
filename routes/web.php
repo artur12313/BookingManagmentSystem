@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,4 +35,11 @@ Route::delete('/users/{id}/delete', [UsersController::class, 'destroy'])->name('
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::patch('/profile/{id}/update', [ProfileController::class, 'update'])->name('profile.update');
 Route::patch('/profile/{id}/password', [ProfileController::class, 'password'])->name('profile.password');
+
+// Categoiries
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+Route::get('/categories/{id}', [CategoriesController::class, 'show'])->name('categories.show');
+Route::post('/categories/create', [CategoriesController::class, 'store'])->name('categories.store');
+Route::patch('/categories/{id}/update', [CategoriesController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{id}/delete', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 });

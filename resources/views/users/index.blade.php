@@ -20,6 +20,7 @@
                     <th scope="col">E-mail</th>
                     <th scope="col">Telefon</th>
                     <th scope="col">Data utworzenia</th>
+                    <th scope="col">Data aktualizacji</th>
                     <th scope="col" class="text-center">Narzędzia</th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->phone}}</td>
                     <td>{{date('d.m.Y', strtotime($user->created_at))}}</td>
+                    <td>{{date('d.m.Y', strtotime($user->updated_at))}}</td>
                     <td class="d-flex justify-content-center">
                     <button
                         class="btn btn-success btn-sm ml-2"
@@ -187,93 +189,94 @@
     </div>
   </div>
 {{-- END MODAL REMOVE USER --}}
-    <script>
-      function regexEmail(email) {
-        let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        return res.test(email);
-      }
-      function validateEmail(e) {
-        let emailInput = $(e);
-        let email = $(e).val();
-        if(regexEmail(email)) {
-            emailInput.attr('style', "border: 1px solid green; color: green");
-        } else {
-            emailInput.attr('style', "border: 1px solid red; color: red");
-        }
-        return false;
-      }
+<script>
+    function regexEmail(email) {
+    let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return res.test(email);
+  }
+  function validateEmail(e) {
+    let emailInput = $(e);
+    let email = $(e).val();
+    if(regexEmail(email)) {
+        emailInput.attr('style', "border: 1px solid green; color: green");
+    } else {
+        emailInput.attr('style', "border: 1px solid red; color: red");
+    }
+    return false;
+  }
 
-      function validateName(e) {
-        let nameInput = $(e);
-        let name = $(e).val();
-        if(name == null || name == '') {
-            nameInput.attr('style', "border: 1px solid red; color: red");
-        } else {
-            nameInput.attr('style', "border: 1px solid green; color: green");
-        }
-        return false;
-      }
+  function validateName(e) {
+    let nameInput = $(e);
+    let name = $(e).val();
+    if(name == null || name == '') {
+        nameInput.attr('style', "border: 1px solid red; color: red");
+    } else {
+        nameInput.attr('style', "border: 1px solid green; color: green");
+    }
+    return false;
+  }
 
-      function validatePassword(e) {
-        let passwordInput = $(e);
-        let password = $(e).val();
-        let passwordResult = $("#passwordResult");
-        if(password == null || password == '') {
-            passwordInput.attr('style', "border: 1px solid red;");
-            passwordResult.html('<ul style="margin-top: 1rem;"><li>Zalecane małe i wielkie litery</li><li>Zalecana długość przynajmniej 8 znaków</li><li>Zalecane użycie znaków specjalnych</li></ul>');
-        } else {
-            passwordInput.attr('style', "border: 1px solid green; color: green");
-            passwordResult.html('');
-        }
-        return false;
-      }
+  function validatePassword(e) {
+    let passwordInput = $(e);
+    let password = $(e).val();
+    let passwordResult = $("#passwordResult");
+    if(password == null || password == '') {
+        passwordInput.attr('style', "border: 1px solid red;");
+        passwordResult.html('<ul style="margin-top: 1rem;"><li>Zalecane małe i wielkie litery</li><li>Zalecana długość przynajmniej 8 znaków</li><li>Zalecane użycie znaków specjalnych</li></ul>');
+    } else {
+        passwordInput.attr('style', "border: 1px solid green; color: green");
+        passwordResult.html('');
+    }
+    return false;
+  }
 
-      function comparePasswords(e) {
-        let result = $("#compareResult");
-        let password = $("#password").val();
-        let password_confirmation = $(e).val();
-        let password_confirmationInput = $(e);
-        if(password == password_confirmation) {
-            password_confirmationInput.attr('style', "border: 1px solid green; color: green;");
-            result.html('');
-        } else {
-            password_confirmationInput.attr('style', "border: 1px solid red; color: red");
-            result.html('<ul style="margin-top: 1rem;"><li>Hasła nie są identyczne</li></ul>');
-        }
-        return false;
-      }
+  function comparePasswords(e) {
+    let result = $("#compareResult");
+    let password = $("#password").val();
+    let password_confirmation = $(e).val();
+    let password_confirmationInput = $(e);
+    if(password == password_confirmation) {
+        password_confirmationInput.attr('style', "border: 1px solid green; color: green;");
+        result.html('');
+    } else {
+        password_confirmationInput.attr('style', "border: 1px solid red; color: red");
+        result.html('<ul style="margin-top: 1rem;"><li>Hasła nie są identyczne</li></ul>');
+    }
+    return false;
+  }
 
-      function removeData(e) {
-        let id = $(e).data('id');
-        let name = $(e).data('name');
-        let modalTitle = $("#removeTitle");
-        let modalContent = $("#modalContent");
-        let modalForm = $("#removeForm");
-        modalForm.attr('action', '/users/' + id + '/delete');
-        modalContent.html('<p>Czy na pewno chcesz usunąć użytkownika ' + '<span class="fw-bold">' + name + '</span>' + '?</p><p>Operacja jest nieodwracalna!!</p>');
-        modalTitle.html('Usuń użytkownika: ' + name);
-      }
+  function removeData(e) {
+    let id = $(e).data('id');
+    let name = $(e).data('name');
+    let modalTitle = $("#removeTitle");
+    let modalContent = $("#modalContent");
+    let modalForm = $("#removeForm");
+    var content = '<p>Czy na pewno chcesz usunąć użytkownika <span class="fw-bold">' + name + '</span>?</p><p>Operacja jest nieodwracalna!!</p>';
+    modalForm.attr('action', '/users/' + id + '/delete');
+    modalContent.html(content);
+    modalTitle.html('Usuń użytkownika: ' + name);
+  }
 
-      function editUser(e) {
-        let id = $(e).data('id');
-        let name = $(e).data('name');
-        let email = $(e).data('email');
-        let phone = $(e).data('phone');
-        let modalTitle = $("#editTitle");
-        let modalName = $("#editName");
-        let modalEmail = $("#editEmail");
-        let modalPhone = $("#editPhone");
-        let modalForm = $("#editForm");
-        modalForm.attr('action', '/users/' + id + '/update');
-        modalName.val(name);
-        modalEmail.val(email);
-        modalPhone.val(phone);
-        modalTitle.html('Edytuj użytkownika: ' + name);
-      }
+  function editUser(e) {
+    let id = $(e).data('id');
+    let name = $(e).data('name');
+    let email = $(e).data('email');
+    let phone = $(e).data('phone');
+    let modalTitle = $("#editTitle");
+    let modalName = $("#editName");
+    let modalEmail = $("#editEmail");
+    let modalPhone = $("#editPhone");
+    let modalForm = $("#editForm");
+    modalForm.attr('action', '/users/' + id + '/update');
+    modalName.val(name);
+    modalEmail.val(email);
+    modalPhone.val(phone);
+    modalTitle.html('Edytuj użytkownika: ' + name);
+  }
 
-      $('.phone').on('input', function (e) {
-        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,3})/);
-        e.target.value = !x[2] ? x[1] :  x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
-    });
-    </script>
+  $('.phone').on('input', function (e) {
+    var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,3})/);
+    e.target.value = !x[2] ? x[1] :  x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
+});
+</script>
 @endsection

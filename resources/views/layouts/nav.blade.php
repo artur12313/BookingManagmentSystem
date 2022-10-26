@@ -11,7 +11,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li>
-                    <a class="nav-link px-2 text-white" href="#">{{ __('Domki') }}</a>
+                    <a class="nav-link px-2 text-white" href="{{ route('categories.index') }}">{{ __('Domki') }}</a>
                 </li>
                 <li>
                     <a class="nav-link px-2 text-white" href="{{ route('users.index') }}">{{ __('Użytkownicy') }}</a>
