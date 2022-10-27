@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\BookingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,5 +51,5 @@ Route::patch('/room/{id}/update', [RoomController::class, 'update'])->name('room
 Route::delete('/room/{id}/delete', [RoomController::class, 'destroy'])->name('room.destroy');
 
 //Booking
-Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 });

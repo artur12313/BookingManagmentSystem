@@ -1,32 +1,39 @@
 import React from "react";
 import Client from "./Steps/Client";
 import Room from "./Steps/Room";
+import Price from "./Steps/Price";
+import Summary from "./Steps/Summary";
+import axios from "axios";
 
 export default class Booking extends React.Component {
+
     state = {
         step: 1,
         email: '',
-        username: '', 
-        password: '',
-        firstName: '',
+        phone: '',
+        name: '',
         lastName: '',
-        country: '',
-        levelOfEducation: '',
+        city: '',
+        postalCode: '',
+        room: '',
+        rooms: window.rooms,
       }
     
-      // go back to previous step
+    componentDidMount() {
+        console.log(this.state.rooms);
+    }
+        
+
       prevStep = () => {
         const { step } = this.state;
         this.setState({ step: step - 1 });
       }
     
-      // proceed to the next step
       nextStep = () => {
         const { step } = this.state;
         this.setState({ step: step + 1 });
       }
     
-      // Handle fields change
       handleChange = input => e => {
         this.setState({ [input]: e.target.value });
       }
@@ -34,13 +41,15 @@ export default class Booking extends React.Component {
 
     render() {
         const { step } = this.state;
-        const { email, username, password, firstName, lastName, country, levelOfEducation } = this.state;
-        const values = { email, username, password, firstName, lastName, country, levelOfEducation }
+        const { rooms } = this.state;
+        const { email, name, lastName, phone, city, postalCode, room } = this.state;
+        const values = { email, name, lastName, phone, city, postalCode, room }
         
         switch(step) {
           case 1: 
             return (
               <Client
+                step={step}
                 nextStep={ this.nextStep }
                 handleChange={ this.handleChange }
                 values={ values }
@@ -48,16 +57,19 @@ export default class Booking extends React.Component {
             )
           case 2: 
             return (
-              <Room 
+              <Room
+                step={step}
                 prevStep={ this.prevStep }
                 nextStep={ this.nextStep }
                 handleChange={ this.handleChange }
                 values={ values }
+                rooms={ rooms }
               />
             )
           case 3: 
               return (
-                <Confirmation 
+                <Price 
+                  step={step}
                   prevStep={ this.prevStep }
                   nextStep={ this.nextStep }
                   values={ values }
@@ -65,7 +77,12 @@ export default class Booking extends React.Component {
               )
             case 4: 
               return (
-                <Success />
+                <Summary
+                  step={step}
+                  prevStep={ this.prevStep }
+                  nextStep={ this.nextStep }
+                  values={ values }
+                />
               )
           default: 
               // do nothing
