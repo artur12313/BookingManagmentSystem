@@ -76,6 +76,47 @@
             }).draw();
         }
     });
+
+    $(document).ready(function() {
+            if(document.getElementById('sectionTable')) {
+             const t = $('#sectionTable').DataTable({
+                "order": [[ 1, "asc" ]],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Wszystko"]],
+                pageLength: parseInt(localStorage.getItem('dtPageLength')) || 10,
+                 language: {
+                    "emptyTable":     "Brak danych w tabeli",
+                    "info":           "Pokazuje _START_ do _END_ z _TOTAL_ wyników",
+                    "infoEmpty":      "Pokazuje 0 do 0 z 0 wyników",
+                    "infoFiltered":   "(przefiltrowano _MAX_ wyników)",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "Pokaż _MENU_ wyników",
+                    "loadingRecords": "Ładowanie...",
+                    "processing":     "Przetwarzanie...",
+                    "search":         "Szukaj:",
+                    "zeroRecords":    "Nie znaleziono pasujących wyników",
+                    "paginate": {
+                        "first":      "Pierwszy",
+                        "last":       "Ostatni",
+                        "next":       "Następny",
+                        "previous":   "Poprzedni"
+                    },
+                    "aria": {
+                        "sortAscending":  ": aktywuj by sortować rosnąco",
+                        "sortDescending": ": aktywuj by sortować malejąco"
+                    }
+                }
+             });
+            $('#sectionTable').on( 'length.dt', function ( e, settings, len ) {
+                localStorage.setItem('dtPageLength', len);
+            });
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                });
+            }).draw();
+        }
+    });
     </script> 
 </body>
 </html>

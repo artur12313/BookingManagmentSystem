@@ -3,8 +3,8 @@
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center">
-        <h1>Rodzaje domków</h1>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryNew">Nowy Rodzaj</button>
+        <h1>Domki</h1>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryNew">Nowy Domek</button>
     </div>
     @if(session('success'))
         <div class="alert alert-success">
@@ -64,7 +64,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Nowy rodzaj</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Nowy Domek</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

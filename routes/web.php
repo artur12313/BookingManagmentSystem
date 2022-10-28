@@ -42,6 +42,7 @@ Route::patch('/profile/{id}/password', [ProfileController::class, 'password'])->
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
 Route::get('/categories/{id}', [CategoriesController::class, 'show'])->name('categories.show');
 Route::post('/categories/create', [CategoriesController::class, 'store'])->name('categories.store');
+Route::post('/categories/{id}/storeSubcategory', [CategoriesController::class, 'storeSubcategory'])->name('categories.storeSubcategory');
 Route::patch('/categories/{id}/update', [CategoriesController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{id}/delete', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 
