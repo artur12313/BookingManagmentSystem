@@ -16,12 +16,12 @@ export default class Booking extends React.Component {
         city: '',
         postalCode: '',
         room: '',
-        rooms: window.rooms,
+        category: '',
+        subcategory: '',
+        dateFrom: '',
+        dateTo: '',
+        categoriesWithRooms: window.categoriesWithRooms,
       }
-    
-    componentDidMount() {
-        console.log(this.state.rooms);
-    }
         
 
       prevStep = () => {
@@ -41,9 +41,9 @@ export default class Booking extends React.Component {
 
     render() {
         const { step } = this.state;
-        const { rooms } = this.state;
-        const { email, name, lastName, phone, city, postalCode, room } = this.state;
-        const values = { email, name, lastName, phone, city, postalCode, room }
+        const { categoriesWithRooms } = this.state;
+        const { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo } = this.state;
+        const values = { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo };
         
         switch(step) {
           case 1: 
@@ -63,7 +63,7 @@ export default class Booking extends React.Component {
                 nextStep={ this.nextStep }
                 handleChange={ this.handleChange }
                 values={ values }
-                rooms={ rooms }
+                categoriesWithRooms={ categoriesWithRooms }
               />
             )
           case 3: 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <script>
-    var rooms = {!! json_encode($rooms->toArray()) !!};
+    var categoriesWithRooms = {!! json_encode($categoriesWithRooms) !!};
 </script>
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
