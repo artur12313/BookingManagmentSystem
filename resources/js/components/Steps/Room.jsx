@@ -37,7 +37,6 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
         }
     }
 
-    console.log(values);
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -53,7 +52,7 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
                                     <div className="form-group row">
                                     <label htmlFor="categories" className="col-md-4 col-form-label text-md-right">Domek</label>
                                     <div className="col-md-6">
-                                        <select className="form-control" id="categories" name="categories" onChange={handleChange('category')}>
+                                        <select className="form-control custom-select" id="categories" name="categories" onChange={handleChange('category')} defaultValue={values.category}>
                                             <option value="">-Wybierz-</option>
                                             {categories.map((category, index) => (
                                                 <option key={index} value={category.id}>{category.name}</option>
@@ -65,7 +64,7 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
                                     <div className="form-group row">
                                     <label htmlFor="subcategories" className="col-md-4 col-form-label text-md-right">Sekcja</label>
                                     <div className="col-md-6">
-                                        <select id="subcategories" className="form-control" name="subcategories" onChange={handleChange('subcategory')}>
+                                        <select id="subcategories" className="form-control custom-select" name="subcategories" onChange={handleChange('subcategory')} defaultValue={values.subcategory}>
                                             <option value="">-Wybierz-</option>
                                             {subcategoriesToShow.map((item) => {
                                                 return <option key={item.id} value={item.id}>{item.name}</option>
@@ -77,7 +76,7 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
                                     <div className="form-group row">
                                     <label htmlFor="room" className="col-md-4 col-form-label text-md-right">Pokój</label>
                                     <div className="col-md-6">
-                                        <select id="room" className="form-control" name="room" required onChange={handleChange('room')}>
+                                        <select id="room" className="form-control custom-select" name="room" required onChange={handleChange('room')} defaultValue={values.room}>
                                             <option value="">-Wybierz-</option>
                                             {roomsToShow.map((item) => {
                                                 return <option key={item.id} value={item.id}>{item.name}</option>
