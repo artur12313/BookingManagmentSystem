@@ -21,6 +21,11 @@ export default class Booking extends React.Component {
         dateFrom: '',
         dateTo: '',
         categoriesWithRooms: window.categoriesWithRooms,
+        adultsList: [{adults: "" }],
+        childrenList: [{children: "" }],
+        freeList: [{free: "" }],
+        respMsg: '',
+        isDisabled: true,
       }
         
 
@@ -37,13 +42,17 @@ export default class Booking extends React.Component {
       handleChange = input => e => {
         this.setState({ [input]: e.target.value });
       }
+
+      handleDisable = (value) => {
+        this.setState({ isDisabled: value });
+      }
     
 
     render() {
         const { step } = this.state;
         const { categoriesWithRooms } = this.state;
-        const { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo } = this.state;
-        const values = { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo };
+        const { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo, adultsList, childrenList, freeList, isDisabled } = this.state;
+        const values = { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo, adultsList, childrenList, freeList, isDisabled };
         
         switch(step) {
           case 1: 
@@ -64,6 +73,7 @@ export default class Booking extends React.Component {
                 handleChange={ this.handleChange }
                 values={ values }
                 categoriesWithRooms={ categoriesWithRooms }
+                handleDisable={ this.handleDisable }
               />
             )
           case 3: 

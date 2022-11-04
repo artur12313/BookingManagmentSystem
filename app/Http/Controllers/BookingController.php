@@ -51,4 +51,26 @@ class BookingController extends Controller
             'rooms' => $rooms,
         ]);
     }
+
+    public function checkDate(Request $request)
+    {
+        $dateFrom = $request->dateFrom;
+        $dateTo = $request->dateTo;
+        $room = Room::find($request->room);
+        // $bookings = $room->bookings;
+        // $booked = false;
+        // foreach($bookings as $booking)
+        // {
+        //     if($booking->date == $date)
+        //     {
+        //         $booked = true;
+        //     }
+        // }
+        return response()->json([
+            'status' => 200,
+            'message' => 'Date checked successfully',
+            'room' => $room->id,
+            // 'booked' => $booked,
+        ]);
+    }
 }

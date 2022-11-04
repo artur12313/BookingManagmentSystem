@@ -11,7 +11,7 @@ const Summary = ({ prevStep, nextStep, values, step }) => {
         e.preventDefault();
         prevStep();
       }
-
+    console.log(values);
     return (
         <div className="container">
             <div className="row justify-content-center">

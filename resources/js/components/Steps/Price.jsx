@@ -1,20 +1,26 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
 
-    const [inputList, setInputList] = useState([{ free: "" }]);
-    const [adultsList, setAdultsList] = useState([{ adults: "" }]);
-    const [childrenList, setChildrenList] = useState([{ childrenAge: "" }]);
+    const [inputList, setInputList] = useState(values.freeList);
+    const [adultsList, setAdultsList] = useState(values.adultsList);
+    const [childrenList, setChildrenList] = useState(values.childrenList);
 
-    console.log(inputList);
-    console.log(adultsList);
-    console.log(childrenList);
+
+
+    useEffect(() => {
+        setInputList(values.freeList);
+        setAdultsList(values.adultsList);
+        setChildrenList(values.childrenList);
+    }, [values.freeList, values.adultsList, values.childrenList]);
+
     const Continue = e => {
         e.preventDefault();
         nextStep();
     }
 
+    console.log(values);
     const Previous = e => {
         e.preventDefault();
         prevStep();
@@ -31,6 +37,7 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
         const list = [...inputList];
         list[index][name] = value;
         setInputList(list);
+        values.freeList = list;
     };
 
     const handleAdultsChange = (e, index) => {
@@ -38,6 +45,7 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
         const list = [...adultsList];
         list[index][name] = value;
         setAdultsList(list);
+        values.adultsList = list;
     };
 
     const handleChildrenChange = (e, index) => {
@@ -45,6 +53,7 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
         const list = [...childrenList];
         list[index][name] = value;
         setChildrenList(list);
+        values.childrenList = list;
     };
 
 
@@ -77,8 +86,15 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
     };
     
     const handleAddChildrenClick = () => {
-        setChildrenList([...childrenList, { childrenAge: "" }]);
+        setChildrenList([...childrenList, { children: "" }]);
     };
+
+    // on load set values from state
+    useEffect(() => {
+        setInputList(values.freeList);
+        setAdultsList(values.adultsList);
+        setChildrenList(values.childrenList);
+    }, []);
     var counter = 1;
     return (
         <div className="container">
@@ -95,12 +111,12 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
                                 {adultsList.map((x, i) => {
                                     var counter = i + 1;
                                     return (
-                                        <div>
+                                        <div key={"adults[" + i + "]"}>
                                             <div className="form-group row">
                                                 <label htmlFor="adults" className="col-md-4 col-form-label text-md-right">Data urodzenia {counter} osoby:</label>
                                                 <div className="col-md-5 d-flex">
-                                                    <input id={"adults[" + [i] + "]"} type="date" className="form-control" name="adults" value={x.adults} key={"adults[" + i + "]"}
-                                                        onChange={e => handleAdultsChange(e, i)} />
+                                                    <input id={"adults[" + [i] + "]"} type="date" className="form-control" name="adults" value={x.adults} 
+                                                        onChange={e => handleAdultsChange(e, i)} defaultValue={values.adultsList.adults} />
                                                     <div className="d-flex gap-2">
                                                         {adultsList.length !== 1 && <button type="button"
                                                             className="btn btn-danger bt-sm mx-2"
@@ -124,11 +140,11 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
                                 {childrenList.map((x, i) => {
                                     var counter = i + 1;
                                     return (
-                                        <div>
+                                        <div key={"children[" + i + "]"}>
                                             <div className="form-group row">
-                                                <label htmlFor="childrenAge" className="col-md-4 col-form-label text-md-right">Data urodzenia {counter} dziecka:</label>
+                                                <label htmlFor="children" className="col-md-4 col-form-label text-md-right">Data urodzenia {counter} dziecka:</label>
                                                 <div className="col-md-5 d-flex">
-                                                    <input id={"childrenAge[" + [i] + "]"} type="date" className="form-control" name="childrenAge" value={x.childrenAge} key={"children[" + i + "]"}
+                                                    <input id={"children[" + [i] + "]"} type="date" className="form-control" name="children" value={x.children}
                                                         onChange={e => handleChildrenChange(e, i)} />
                                                     <div className="d-flex gap-2">
                                                         {childrenList.length !== 1 && <button type="button"
@@ -152,13 +168,13 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
                                 <h5>"Bezpłatne" osoby</h5>
                                 {inputList.map((x, i) => {
                                     var counter = i + 1;
-                                    console.log(x);
+                                    // console.log(x);
                                     return (
-                                        <div>
+                                        <div key={"free[" + i + "]"}>
                                             <div className="form-group row">
                                                 <label htmlFor="free" className="col-md-4 col-form-label text-md-right">Data urodzenia {counter} osoby:</label>
                                                 <div className="col-md-5 d-flex">
-                                                    <input id={"free[" + [i] + "]"} type="date" className="form-control" name="free" value={x.free} key={"free[" + i + "]"}
+                                                    <input id={"free[" + [i] + "]"} type="date" className="form-control" name="free" value={x.free} 
                                                         onChange={e => handleInputChange(e, i)} />
                                                     <div className="d-flex gap-2">
                                                         {inputList.length !== 1 && <button type="button"

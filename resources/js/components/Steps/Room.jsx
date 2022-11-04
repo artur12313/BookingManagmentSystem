@@ -1,6 +1,6 @@
 import React from "react";
 
-const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRooms}) => {
+const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRooms, handleDisable}) => {
 
     const Continue = e => {
         e.preventDefault();
@@ -34,6 +34,45 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
                     roomsToShow = sub.rooms;
                 }
             });
+        }
+    }
+
+    const checkDate = () => {
+        if (values.room){
+            if(values.dateFrom === '' || values.dateTo === '')
+            {
+                alert('Uzupełnij daty');
+                handleDisable(true);
+            } else if (values.dateFrom === values.dateTo ) {
+                alert('Data przyjazdu i data wyjazdu nie mogą być takie same');
+                handleDisable(true);
+            } else {
+                if(values.dateFrom > values.dateTo)
+                {
+                    alert('Data przyjazdu nie może być większa niż data wyjazdu');
+                    handleDisable(true);
+                } else {
+                    axios.post('/api/checkDate', {
+                        room: values.room,
+                        dateFrom: values.dateFrom,
+                        dateTo: values.dateTo,
+                    })
+                    .then(response => {
+                        if (response.status === 200) {
+                        values.respMsg = response.data.room;
+                            handleDisable(false);
+                        } else {
+                            alert('Wybrany termin jest już zajęty');
+                            handleDisable(true);
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+                }
+            }
+        } else {
+            alert('Wybierz pokój');
         }
     }
 
@@ -87,20 +126,26 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
                                 <div className="form-group row">
                                     <label htmlFor="dateFrom" className="col-md-4 col-form-label text-md-right">Data przyjazdu</label>
                                     <div className="col-md-6">
-                                        <input id="dateFrom" type="date" className="form-control" name="dateFrom" required onChange={handleChange('dateFrom')}/>
+                                        <input id="dateFrom" type="date" className="form-control" name="dateFrom" required onChange={handleChange('dateFrom')} defaultValue={values.dateFrom}/>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label htmlFor="dateTo" className="col-md-4 col-form-label text-md-right">Data wyjazdu</label>
                                     <div className="col-md-6">
-                                        <input id="dateTo" type="date" className="form-control" name="dateTo" required  onChange={handleChange('dateTo')}/>
+                                        <input id="dateTo" type="date" className="form-control" name="dateTo" required  onChange={handleChange('dateTo')} defaultValue={values.dateTo}/>
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <label htmlFor="dateAvability" className="col-md-4 col-form-label text-md-right">Sprawdź dostępność</label>
+                                    <div className="col-md-6">
+                                        <button type="button" className="btn btn-success" onClick={ checkDate }>Sprawdź</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div className="card-footer d-flex justify-content-between">
                             <button type="button" className="btn btn-primary" onClick={ Previous }>Poprzedni</button>
-                            <button type="button" className="btn btn-primary" onClick={ Continue }>Następny</button>
+                            <button type="button" className="btn btn-primary next" onClick={ Continue } disabled={values.isDisabled}>Następny</button>
                         </div>
                     </div>
                 </div>
