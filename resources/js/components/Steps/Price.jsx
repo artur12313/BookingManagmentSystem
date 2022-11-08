@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
+const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setChildren, setFree }) => {
 
     const [inputList, setInputList] = useState(values.freeList);
     const [adultsList, setAdultsList] = useState(values.adultsList);
@@ -9,18 +9,30 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
 
 
 
-    useEffect(() => {
-        setInputList(values.freeList);
-        setAdultsList(values.adultsList);
-        setChildrenList(values.childrenList);
-    }, [values.freeList, values.adultsList, values.childrenList]);
-
     const Continue = e => {
+        
+        var adultsToAdd = [];
+        adultsList.map((item) => {
+            adultsToAdd.push(item);
+        });
+        setAdults(adultsToAdd);
+
+        var childrenToAdd = [];
+        childrenList.map((item) => {
+            childrenToAdd.push(item);
+        });
+        setChildren(childrenToAdd);
+
+        var freeToAdd = [];
+        inputList.map((item) => {
+            freeToAdd.push(item);
+        });
+        setFree(freeToAdd);
+
         e.preventDefault();
         nextStep();
     }
 
-    console.log(values);
     const Previous = e => {
         e.preventDefault();
         prevStep();
@@ -37,7 +49,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
         const list = [...inputList];
         list[index][name] = value;
         setInputList(list);
-        values.freeList = list;
     };
 
     const handleAdultsChange = (e, index) => {
@@ -45,7 +56,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
         const list = [...adultsList];
         list[index][name] = value;
         setAdultsList(list);
-        values.adultsList = list;
     };
 
     const handleChildrenChange = (e, index) => {
@@ -53,7 +63,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
         const list = [...childrenList];
         list[index][name] = value;
         setChildrenList(list);
-        values.childrenList = list;
     };
 
 
@@ -168,7 +177,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step }) => {
                                 <h5>"Bezpłatne" osoby</h5>
                                 {inputList.map((x, i) => {
                                     var counter = i + 1;
-                                    // console.log(x);
                                     return (
                                         <div key={"free[" + i + "]"}>
                                             <div className="form-group row">

@@ -47,6 +47,17 @@ export default class Booking extends React.Component {
         this.setState({ isDisabled: value });
       }
     
+      setAdults = (value) => {
+        this.setState({ adultsList: value });
+      }
+
+      setChildren = (value) => {
+        this.setState({ childrenList: value });
+      }
+
+      setFree = (value) => {
+        this.setState({ freeList: value });
+      }
 
     render() {
         const { step } = this.state;
@@ -83,6 +94,9 @@ export default class Booking extends React.Component {
                   prevStep={ this.prevStep }
                   nextStep={ this.nextStep }
                   values={ values }
+                  setAdults={ this.setAdults }
+                  setChildren={ this.setChildren }
+                  setFree={ this.setFree }
                 />
               )
             case 4: 
