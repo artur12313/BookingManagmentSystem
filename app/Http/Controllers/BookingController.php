@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\User;
+use App\Models\Client;
 use App\Models\Category;
+use App\Models\Booking;
 
 class BookingController extends Controller
 {
@@ -12,7 +15,6 @@ class BookingController extends Controller
     {
         $rooms = Room::all();
         $categories = Category::whereNull('parent_id')->get();
-        // categories with subcategories and rooms in one variable
         $categoriesWithRooms = [];
         $subcategories = [];
         foreach($categories as $category)
@@ -43,12 +45,16 @@ class BookingController extends Controller
 
     public function getRooms(Request $request)
     {
-        $rooms = Room::all();
+        $room = Room::find($request->room);
+        $category = Category::find($request->category);
+        $subcategory = Category::find($request->subcategory);
 
         return response()->json([
             'status' => 200,
             'message' => 'Rooms fetched',
-            'rooms' => $rooms,
+            'room' => $room,
+            'category' => $category,
+            'subcategory' => $subcategory
         ]);
     }
 
@@ -57,20 +63,31 @@ class BookingController extends Controller
         $dateFrom = $request->dateFrom;
         $dateTo = $request->dateTo;
         $room = Room::find($request->room);
-        // $bookings = $room->bookings;
-        // $booked = false;
-        // foreach($bookings as $booking)
-        // {
-        //     if($booking->date == $date)
-        //     {
-        //         $booked = true;
-        //     }
-        // }
-        return response()->json([
-            'status' => 200,
-            'message' => 'Date checked successfully',
-            'room' => $room->id,
-            // 'booked' => $booked,
-        ]);
+        $bookings = Booking::where('room_id', $room->id)->get();
+        $booked = false;
+        foreach($bookings as $booking)
+        {
+            if($booking->start_date >= $dateFrom && $booking->end_date <= $dateTo)
+            {
+                $booked = true;
+            }
+            
+        }
+        if($booked)
+        {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Pokój nie jest dostępny w tym terminie',
+                'booked' => $booked
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Pokój jest dostępny w tym terminie',
+                'booked' => $booked
+            ]);
+        }
     }
 }

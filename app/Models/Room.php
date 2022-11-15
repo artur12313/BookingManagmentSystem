@@ -21,4 +21,19 @@ class Room extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function getBookingsAttribute()
+    {
+        return $this->bookings()->get();
+    }
+
+    public function getBookingsCountAttribute()
+    {
+        return $this->bookings()->count();
+    }
 }

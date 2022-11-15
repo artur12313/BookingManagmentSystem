@@ -43,9 +43,6 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
             {
                 alert('Uzupełnij daty');
                 handleDisable(true);
-            } else if (values.dateFrom === values.dateTo ) {
-                alert('Data przyjazdu i data wyjazdu nie mogą być takie same');
-                handleDisable(true);
             } else {
                 if(values.dateFrom > values.dateTo)
                 {
@@ -59,15 +56,17 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
                     })
                     .then(response => {
                         if (response.status === 200) {
-                        values.respMsg = response.data.room;
-                            handleDisable(false);
+                        values.respMsg = response.data.message;
+                            alert(values.respMsg);
+                            handleDisable(response.data.booked);
                         } else {
-                            alert('Wybrany termin jest już zajęty');
+                            alert(response.data.message);
                             handleDisable(true);
                         }
                     })
                     .catch(error => {
                         console.log(error);
+                        handleDisable(true);
                     });
                 }
             }
