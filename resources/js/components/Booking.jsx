@@ -25,6 +25,11 @@ export default class Booking extends React.Component {
         childrenList: [{children: "" }],
         freeList: [{free: "" }],
         respMsg: '',
+        comments: '',
+        status: '',
+        price: '',
+        typeOfClient: '',
+        numberOfPeople: 0,
         isDisabled: true,
       }
         
@@ -59,11 +64,47 @@ export default class Booking extends React.Component {
         this.setState({ freeList: value });
       }
 
+      submit = () => {
+        axios.post('/api/booking/new', {
+            email: this.state.email,
+            phone: this.state.phone,
+            name: this.state.name,
+            lastName: this.state.lastName,
+            city: this.state.city,
+            postalCode: this.state.postalCode,
+            room: this.state.room,
+            category: this.state.category,
+            subcategory: this.state.subcategory,
+            dateFrom: this.state.dateFrom,
+            dateTo: this.state.dateTo,
+            comments: this.state.comments,
+            status: this.state.status,
+            price: this.state.price,
+            typeOfClient: this.state.typeOfClient,
+            numberOfPeople: this.state.numberOfPeople,
+        })
+        .then(response => {
+            if (response.status === 200) {
+                this.setState({ respMsg: response.data.message });
+                alert(this.state.respMsg);
+                // window.location.href = '/';
+                console.log(response.data);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+      }
+
     render() {
         const { step } = this.state;
         const { categoriesWithRooms } = this.state;
-        const { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo, adultsList, childrenList, freeList, isDisabled } = this.state;
-        const values = { email, name, lastName, phone, city, postalCode, room, category, subcategory, dateFrom, dateTo, adultsList, childrenList, freeList, isDisabled };
+        const { email, name, lastName, phone, city, postalCode, room, category,
+          subcategory, dateFrom, dateTo, adultsList, childrenList, freeList,
+          isDisabled, comments, typeOfClient, price, status, numberOfPeople } = this.state;
+        const values = { email, name, lastName, phone, city, postalCode, room,
+          category, subcategory, dateFrom, dateTo, adultsList, childrenList,
+          freeList, isDisabled, comments, typeOfClient, price, status, numberOfPeople };
         
         switch(step) {
           case 1: 
@@ -106,6 +147,8 @@ export default class Booking extends React.Component {
                   prevStep={ this.prevStep }
                   nextStep={ this.nextStep }
                   values={ values }
+                  handleChange={ this.handleChange }
+                  submit={ this.submit }
                 />
               )
           default: 

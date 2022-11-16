@@ -90,4 +90,55 @@ class BookingController extends Controller
             ]);
         }
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'phone' => 'required',
+            'name' => 'required',
+            'lastName' => 'required',
+            'city' => 'required',
+            'postalCode' => 'required',
+            'room' => 'required',
+            'dateFrom' => 'required',
+            'dateTo' => 'required',
+            'status' => 'required',
+        ]);
+
+        $user = User::find(auth()->user()->id);
+
+        $client = new Client;
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->name = $request->name;
+        $client->lastName = $request->lastName;
+        $client->city = $request->city;
+        $client->postal_code = $request->postalCode;
+        $client->typeOfClient = $request->typeOfClient;
+        // $client->save();
+
+        $booking = new Booking;
+        // $booking->client_id = $client->id;
+        $booking->client_id = 1;
+        $booking->room_id = $request->room;
+        $booking->user_id = 1;
+        $booking->start_date = $request->dateFrom;
+        $booking->end_date = $request->dateTo;
+        $booking->status = $request->status;
+        $booking->numberOfPeople = $request->numberOfPeople;
+        $booking->price = $request->price;
+        $booking->comments = $request->comments;
+        // $booking->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'New booking created',
+            'booking' => $booking,
+            'client' => $client,
+            'user' => $user
+        ]);
+
+        // return redirect()->route('booking.index')->withSuccess(__('Rezerwacja dodana pomyślnie.'));
+    }
 }

@@ -106,6 +106,17 @@ const Client = ({nextStep, handleChange, values, step}) => {
                                             />
                                     </div>
                                 </div>
+                                <div className="form-group row">
+                                    <label htmlFor="typeOfClient" className="col-md-4 col-form-label text-md-right">Klient</label>
+                                    <div className="col-md-6">
+                                        <select className="form-control custom-select" id="typeOfClient" name="typeOfClient" onChange={handleChange('typeOfClient')} defaultValue={values.typeOfClient}>
+                                            <option value="">Wybierz</option>
+                                            <option value="1">Stały</option>
+                                            <option value="2">Nowy</option>
+                                            <option value="3">Powracający</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div className="card-footer d-flex justify-content-end">
                                 <button type="submit" className="btn btn-primary" onClick={ Continue }>Następny</button>

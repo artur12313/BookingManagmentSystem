@@ -24,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/booking/newClient', [BookingController::class, 'newClient'])->name('booking.newClient');
 Route::post('/booking/rooms', [BookingController::class, 'getRooms'])->name('booking.rooms');
 Route::post('/checkDate', [BookingController::class, 'checkDate'])->name('booking.checkDate');
+Route::post('/booking/new', [BookingController::class, 'store'])->name('booking.store');

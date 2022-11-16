@@ -19,6 +19,7 @@ class Client extends Model
         'city',
         'phone',
         'email',
+        'typeOfClient',
     ];
 
 }
