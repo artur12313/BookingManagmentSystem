@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Client;
@@ -34,12 +35,19 @@ class BookingController extends Controller
         return view('booking.index')->with(['categoriesWithRooms' => $categoriesWithRooms]);
     }
 
-    public function newClient(Request $request) 
+    public function getCalendar(Request $request) 
     {
+
+        $bookings = Booking::all();
+        $rooms = Room::all();
+        $categories = Category::whereNull('parent_id')->get();
 
         return response()->json([
             'status' => 200,
-            'message' => 'New user created'
+            'message' => 'Data downloaded successfully',
+            'bookings' => $bookings,
+            'rooms' => $rooms,
+            'categories' => $categories
         ]);
     }
 
@@ -106,39 +114,33 @@ class BookingController extends Controller
             'status' => 'required',
         ]);
 
-        $user = User::find(auth()->user()->id);
-
         $client = new Client;
         $client->email = $request->email;
         $client->phone = $request->phone;
         $client->name = $request->name;
         $client->lastName = $request->lastName;
         $client->city = $request->city;
-        $client->postal_code = $request->postalCode;
+        $client->postalCode = $request->postalCode;
         $client->typeOfClient = $request->typeOfClient;
-        // $client->save();
+        $client->save();
 
         $booking = new Booking;
-        // $booking->client_id = $client->id;
-        $booking->client_id = 1;
+        $booking->client_id = $client->id;
         $booking->room_id = $request->room;
-        $booking->user_id = 1;
+        $booking->user_id = $request->user_id;
         $booking->start_date = $request->dateFrom;
         $booking->end_date = $request->dateTo;
         $booking->status = $request->status;
         $booking->numberOfPeople = $request->numberOfPeople;
         $booking->price = $request->price;
         $booking->comments = $request->comments;
-        // $booking->save();
+        $booking->save();
 
         return response()->json([
             'status' => 200,
-            'message' => 'New booking created',
+            'message' => 'Pomyślnie zarezerwowano pokój',
             'booking' => $booking,
-            'client' => $client,
-            'user' => $user
         ]);
 
-        // return redirect()->route('booking.index')->withSuccess(__('Rezerwacja dodana pomyślnie.'));
     }
 }

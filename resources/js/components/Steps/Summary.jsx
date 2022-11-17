@@ -97,7 +97,7 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
         if(numberOfPeopleToCount.length > 0)
         {
             values.numberOfPeople = numberOfPeopleToCount.length;
-            return numberOfPeopleToCount.length;
+            return values.numberOfPeople;
         }
     }
 

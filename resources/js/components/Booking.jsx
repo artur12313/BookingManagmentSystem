@@ -31,6 +31,7 @@ export default class Booking extends React.Component {
         typeOfClient: '',
         numberOfPeople: 0,
         isDisabled: true,
+        user_id: window.user_id,
       }
         
 
@@ -82,12 +83,12 @@ export default class Booking extends React.Component {
             price: this.state.price,
             typeOfClient: this.state.typeOfClient,
             numberOfPeople: this.state.numberOfPeople,
+            user_id: this.state.user_id,
         })
         .then(response => {
             if (response.status === 200) {
                 this.setState({ respMsg: response.data.message });
-                alert(this.state.respMsg);
-                // window.location.href = '/';
+                window.location.href = '/';
                 console.log(response.data);
             }
         })

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <script>
+    var user_id = {!! auth()->user()->id !!};
     var categoriesWithRooms = {!! json_encode($categoriesWithRooms) !!};
 </script>
 <div class="container">
