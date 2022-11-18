@@ -41,13 +41,15 @@ class BookingController extends Controller
         $bookings = Booking::all();
         $rooms = Room::all();
         $categories = Category::whereNull('parent_id')->get();
+        $subcategories = Category::whereNotNull('parent_id')->get();
 
         return response()->json([
             'status' => 200,
             'message' => 'Data downloaded successfully',
             'bookings' => $bookings,
             'rooms' => $rooms,
-            'categories' => $categories
+            'categories' => $categories,
+            'subcategories' => $subcategories
         ]);
     }
 
