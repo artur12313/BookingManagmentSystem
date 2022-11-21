@@ -98,7 +98,7 @@
                 <button
                     class="btn btn-success btn-sm ml-2"
                     data-toggle="modal"
-                    data-target="#editRoom"
+                    data-target="#editCategory"
                     data-id="{{ $item->id }}"
                     data-name="{{ $item->name }}"
                     onclick="edit(this)"
@@ -107,7 +107,7 @@
                         type="button"
                         class="btn btn-danger btn-sm ml-2"
                         data-toggle="modal"
-                        data-target="#roomRemove"
+                        data-target="#categoryRemove"
                         data-id="{{ $item->id }}"
                         data-name="{{ $item->name }}"
                         onclick="removeData(this)"
@@ -179,6 +179,46 @@
   </div>
 </div>
 {{-- END MODAL ADD NEW SUBCATEGORY --}}
+{{-- MODAL EDIT CATEGORY --}}
+
+<div class="modal fade" id="editCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" id="editForm">
+          @method('patch')
+          @csrf
+          <div class="d-flex flex-column w-100 justify-content-center">
+          <div class="mb-3">
+              <label for="name" class="form-label">{{ __('Nazwa') }}</label>
+              <input
+                  id="editName"
+                  type="text" 
+                  class="form-control" 
+                  name="name" 
+                  placeholder="Nazwa" required/>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success">Edytuj</button>
+          </div>
+      </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- END MODAL EDIT CATEGORY --}}
+
 {{-- MODAL REMOVE CATEGORY --}}
 <div class="modal fade" id="categoryRemove" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
