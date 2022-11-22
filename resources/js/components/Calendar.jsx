@@ -1,5 +1,5 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import usePageLoader from "../hooks/usePageLoader";
 import CalendarHeader from "./CalendarHeader/calendarHeader";
 import CalendarContent from "./CalendarContent/CalendarContent";
@@ -10,13 +10,15 @@ export default function Calendar() {
     const [calendarSubcategories, setCalendatSubcategories] = useState([]);
     const [calendarRooms, setCalendarRooms] = useState([]);
     const [calendarBookings, setCalendarBookings] = useState([]);
+    const [monthToAdd, setMonthToAdd] = useState(1);
+    const [yearToAdd, setYearToAdd] = useState(0);
 
     useEffect(() => {
         showLoader();
 
         axios.get('/api/booking/calendar')
             .then(response => {
-                if(response.status === 200) {
+                if (response.status === 200) {
                     setCalendatCategories(response.data.categories);
                     setCalendatSubcategories(response.data.subcategories);
                     setCalendarRooms(response.data.rooms);
@@ -27,32 +29,71 @@ export default function Calendar() {
                     }, 1000);
                 }
             }
-        ).catch(error => {
-            console.log(error);
-        }
-        )
+            ).catch(error => {
+                console.log(error);
+            }
+            )
     }, []);
 
-    // get actual date
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    const yyyy = today.getFullYear();
+    // var dd = String(today.getDate()).padStart(2, '0');
+    var actualMonth = today.getMonth() + monthToAdd;
+    var actualYear = today.getFullYear() + yearToAdd;
+    var daysToDisplay = [];
+    var daysToCompare = [];
+    
+
+    const nextMonth = () => {
+        if (actualMonth === 12) {
+            setMonthToAdd(-9);
+            setYearToAdd(yearToAdd + 1);
+        } else {
+            setMonthToAdd(monthToAdd + 1);
+        }
+
+    }
+
+    const prevMonth = () => {
+        if (actualMonth === 1) {
+            setMonthToAdd(2);
+            setYearToAdd(yearToAdd - 1);
+        } else {
+            setMonthToAdd(monthToAdd - 1);
+        }
+    }
+
+    const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
+    const days = daysInMonth(actualMonth, actualYear);
+    for (let i = 1; i <= days; i++) {
+        daysToCompare.push(actualYear + '-' + actualMonth + '-' + i);
+        daysToDisplay.push(i);
+    }
 
     return (
-        <div>
+        <>
             {loading ? loading : (
-                <div>
-                    <ul>
-                        {calendarCategories.map(category => (
-                            <div key={category.id} className="card my-4">
-                            <CalendarHeader category={category} date={today}/>
-                            <CalendarContent category={category} calendarSubcategories={calendarSubcategories} calendarRooms={calendarRooms} calendarBookings={calendarBookings}/>
-                            </div>
-                        ))}
-                    </ul>
-                </div>
+                    calendarCategories.map(category => (
+                        <div key={category.id} className="card my-4 mx-3">
+                            <CalendarHeader
+                                category={category}
+                                prevMonth={prevMonth}
+                                nextMonth={nextMonth}
+                                actualMonth={actualMonth}
+                                actualYear={actualYear}
+                            />
+                            <CalendarContent
+                                category={category}
+                                calendarSubcategories={calendarSubcategories}
+                                calendarRooms={calendarRooms}
+                                calendarBookings={calendarBookings}
+                                daysToDisplay={daysToDisplay}
+                                actualMonth={actualMonth}
+                                actualYear={actualYear}
+                                daysToCompare={daysToCompare}
+                            />
+                        </div>
+                    ))
             )}
-        </div>
+        </>
     );
 }

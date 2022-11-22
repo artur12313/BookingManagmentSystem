@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Booking from './Booking';
 import Calendar from './Calendar';
+import '../../css/app.css';
 
 function App() {
     return (

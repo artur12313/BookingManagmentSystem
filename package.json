@@ -6,6 +6,7 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
+        "@types/react": "^18.0.25",
         "@vitejs/plugin-react": "^2.0.0",
         "axios": "^0.27",
         "bootstrap": "^5.2.1",
@@ -16,5 +17,8 @@
         "react-dom": "^17.0.2",
         "sass": "^1.32.11",
         "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "date-fns": "^2.29.3"
     }
 }
