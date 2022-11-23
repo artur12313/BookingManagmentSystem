@@ -22,7 +22,7 @@
             <p>Data przyjazdu: {{$booking->start_date}}</p>
             <p>Data wyjazdu: {{$booking->end_date}}</p>
             <p>Liczba osób objętych zniżką: {{$booking->numberOfPeople}}</p>
-            <p>Status: {{$booking->status}}</p>
+            <p>Status: {{$booking->status_text}}</p>
             <p>Kwota podana przy rezerwacji: {{$booking->price ? $booking->price : ' ' }} {{$booking->price ? 'zł' : ''}}</p>
         </div>
     </div>

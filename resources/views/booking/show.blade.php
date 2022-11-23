@@ -51,7 +51,7 @@
                         {{$item->end_date}}
                     </td>
                     <td>
-                        {{$item->status}}
+                        {{$item->status_text}}
                     </td>
                     <td>{{date('d.m.Y', strtotime($item->created_at))}}</td>
                     <td class="d-flex justify-content-center">

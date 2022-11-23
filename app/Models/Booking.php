@@ -42,9 +42,9 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getStatusAttribute($value)
+    public function getStatusTextAttribute()
     {
-        switch($value)
+        switch($this->status)
         {
             case 0:
                 return 'Nie wybrano';
