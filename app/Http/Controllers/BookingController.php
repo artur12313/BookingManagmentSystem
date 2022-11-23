@@ -35,6 +35,57 @@ class BookingController extends Controller
         return view('booking.index')->with(['categoriesWithRooms' => $categoriesWithRooms]);
     }
 
+    public function show()
+    {
+        $bookings = Booking::where('end_date', '>=', date('Y-m-d'))->get();
+
+        return view('booking.show')->with(['bookings' => $bookings]);
+    }
+
+    public function edit($id)
+    {
+        $booking = Booking::find($id);
+        $client = Client::find($booking->client_id);
+        $room = Room::find($booking->room_id);
+        $categories = Category::whereNull('parent_id')->get();
+        $categoriesWithRooms = [];
+        $subcategories = [];
+        foreach($categories as $category)
+        {
+            $subcategories = Category::where('parent_id', $category->id)->get();
+            foreach($subcategories as $subcategory)
+            {
+                $subcategory->rooms = Room::where('category_id', $subcategory->id)->get();
+            }
+            $rooms = Room::where('category_id', $category->id)->get();
+            $categoriesWithRooms[] = [
+                'category' => $category,
+                'subcategories' => $subcategories,
+                'rooms' => $rooms
+            ];
+        }
+
+        return view('booking.edit')->with(['booking' => $booking, 'client' => $client, 'categoriesWithRooms' => $categoriesWithRooms, 'room' => $room]);
+    }
+
+    public function details($id)
+    {
+        $booking = Booking::find($id);
+        $client = Client::find($booking->client_id);
+
+        return view('booking.details')->with(['booking' => $booking, 'client' => $client]);
+    }
+
+    public function destroy($id)
+    {
+        $booking = Booking::find($id);
+        $client = Client::find($booking->client_id);
+        $booking->delete();
+        $client-> delete();
+
+        return redirect()->route('booking.show')->with('success', 'Pomyślnie usunięto rezerwację');
+    }
+
     public function getCalendar(Request $request) 
     {
 

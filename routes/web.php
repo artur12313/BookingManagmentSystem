@@ -53,4 +53,8 @@ Route::delete('/room/{id}/delete', [RoomController::class, 'destroy'])->name('ro
 
 //Booking
 Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking/all', [BookingController::class, 'show'])->name('booking.show');
+Route::get('/booking/{id}', [BookingController::class, 'edit'])->name('booking.edit');
+Route::get('/booking/details/{id}', [BookingController::class, 'details'])->name('booking.details');
+Route::delete('/booking/{id}/delete', [BookingController::class, 'destroy'])->name('booking.destroy');
 });

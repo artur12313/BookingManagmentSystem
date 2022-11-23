@@ -19,6 +19,9 @@
                 <li>
                     <a class="nav-link px-2 text-white" href="{{ route('booking.index') }}">{{ __('Nowa rezerwacja') }}</a>
                 </li>
+                <li>
+                    <a class="nav-link px-2 text-white" href="{{ route('booking.show') }}">{{ __('Lista rezerwacji') }}</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

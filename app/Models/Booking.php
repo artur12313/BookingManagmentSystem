@@ -41,4 +41,19 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getStatusAttribute($value)
+    {
+        switch($value)
+        {
+            case 0:
+                return 'Nie wybrano';
+            case 1:
+                return 'Zarezerwowane';
+            case 2:
+                return 'Oczekiwanie na płatność';
+            case 3:
+                return 'Zapłacone';
+        }
+    }
 }
