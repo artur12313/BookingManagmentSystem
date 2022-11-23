@@ -12,24 +12,69 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
         if (bookings.length === 0) {
             output.push(
                 <div key={day}>
-                    <a href={newbookingLink} className="btn btn-sm btn-success rounded-0 border outline-0 p-0" style={{width: 45}}><div className="py-3">&nbsp;</div></a>
+                    <a href={newbookingLink} target="_blank" className="btn btn-sm btn-success rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                        <div className="py-3">&nbsp;</div>
+                    </a>
                 </div>
             );
         } else {
             bookings.forEach(booking => {
                 let editLink = '/booking/details/' + booking.id;
-                output.push(
-                    <div key={day}>
-                       <a href={editLink} className="btn btn-sm btn-danger rounded-0 border outline-0 p-0" style={{width: 45}}><div className="py-3" style={{width: 45}}>&nbsp;</div></a>
-                    </div>
-                );
+                console.log(booking);
+                switch (booking.status) {
+                    case 0:
+                        output.push(
+                            <div key={day}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-warning rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                    <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
+                                </a>
+                            </div>
+                        );
+                        break;
+                    case 1:
+                        output.push(
+                            <div key={day}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-info rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                    <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
+                                </a>
+                            </div>
+                        );
+                        break;
+                    case 2:
+                        output.push(
+                            <div key={day}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-primary rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                    <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
+                                </a>
+                            </div>
+                        );
+                        break;
+                        case 3:
+                        output.push(
+                            <div key={day}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-danger rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                    <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
+                                </a>
+                            </div>
+                        );
+                        break;
+                    default:
+                        output.push(
+                            <div key={day}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-danger rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                    <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
+                                </a>
+                            </div>
+                        );
+                        break;
+                }
             });
         }
     });
 
     return (
         <div className="col-9 px-0 monthDays d-flex flex-wrap justify-content-around">
-                   {output}
+            {output}
         </div>
     );
 }
