@@ -25,7 +25,7 @@ function CalendarContentTop({calendarSubcategories, daysToDisplay, actualMonth})
                 <div className="d-flex justify-content-around monthDays">
                     {daysToDisplay.map(day => (
                         <div key={day} className="border-right">
-                            <div className="d-flex flex-column justify-content-center text-center px-2 py-1">
+                            <div className="d-flex flex-column justify-content-center text-center px-2 py-1" style={{width: 45}}>
                                 <div>{day}</div>
                                 <div><DayNames dayName={formatDate(addDays(startDate, day), dateFormat)} /></div>
                             </div>

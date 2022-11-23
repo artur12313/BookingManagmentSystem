@@ -23,7 +23,7 @@ export default function Calendar() {
                     setCalendatSubcategories(response.data.subcategories);
                     setCalendarRooms(response.data.rooms);
                     setCalendarBookings(response.data.bookings);
-                    console.log(response.data);
+
                     setTimeout(() => {
                         hideLoader();
                     }, 1000);

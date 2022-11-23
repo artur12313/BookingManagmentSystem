@@ -23,7 +23,7 @@ function CalendarContent({ calendarSubcategories, calendarRooms, category, calen
                     ))
                 ) : (
                     <>
-                        <CalendarContentTop daysToDisplay={daysToDisplay} actualMonth={actualMonth}/>
+                        <BookedDays calendarBookings={calendarBookings} room={item} daysToDisplay={daysToDisplay} daysToCompare={daysToCompare}/>
                     </>
                 )}
                     <>
