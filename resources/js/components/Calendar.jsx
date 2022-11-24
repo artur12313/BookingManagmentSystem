@@ -65,14 +65,29 @@ export default function Calendar() {
     const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
     const days = daysInMonth(actualMonth, actualYear);
     for (let i = 1; i <= days; i++) {
-        daysToCompare.push(actualYear + '-' + actualMonth + '-' + i);
-        daysToDisplay.push(i);
+        var dd = String(i).padStart(2, '0');
+        daysToCompare.push(actualYear + '-' + actualMonth + '-' + dd);
+        daysToDisplay.push(dd);
     }
 
     return (
         <>
             {loading ? loading : (
-                    calendarCategories.map(category => (
+                <>
+                <div className="container d-flex justify-content-center gap-2">
+                    <div>
+                        <button className="btn btn-sm btn-primary">&nbsp;</button> - <span>Oczekiwanie na płatność</span>
+                    </div>
+                    <div>
+                        <button className="btn btn-sm btn-danger">&nbsp;</button> - <span>Zapłacone</span>
+                    </div>
+                    <div>
+                        <button className="btn btn-sm btn-info">&nbsp;</button> - <span>Zarezerwowane</span>
+                    </div>
+                </div>
+
+
+                    {calendarCategories.map(category => (
                         <div key={category.id} className="card my-4 mx-3">
                             <CalendarHeader
                                 category={category}
@@ -90,9 +105,11 @@ export default function Calendar() {
                                 actualMonth={actualMonth}
                                 actualYear={actualYear}
                                 daysToCompare={daysToCompare}
+                                today={today}
                             />
                         </div>
-                    ))
+                    ))}
+                </>
             )}
         </>
     );

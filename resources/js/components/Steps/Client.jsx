@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const Client = ({nextStep, handleChange, values, step}) => {
+const Client = ({nextStep, handleChange, values, step, allSteps}) => {
 
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
@@ -18,7 +18,7 @@ const Client = ({nextStep, handleChange, values, step}) => {
                     <div className="card">
                         <div className="card-header d-flex justify-content-between">
                             <h5>Dodawanie danych klienta</h5>
-                            <h5>Krok {step} z 4</h5>
+                            <h5>Krok {step} z {allSteps}</h5>
                         </div>
                         <form>
                             <div className="card-body">

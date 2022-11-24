@@ -1,6 +1,6 @@
 import React from "react";
 
-const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRooms, handleDisable}) => {
+const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRooms, handleDisable, allSteps}) => {
 
     const Continue = e => {
         e.preventDefault();
@@ -82,7 +82,7 @@ const Room = ({ nextStep, prevStep, handleChange, values, step, categoriesWithRo
                     <div className="card">
                         <div className="card-header d-flex justify-content-between">
                             <h5>Wybierz pokój oraz czas pobytu</h5>
-                            <h5>Krok {step} z 4</h5>
+                            <h5>Krok {step} z {allSteps}</h5>
                         </div>
                         <div className="card-body">
                             <form>

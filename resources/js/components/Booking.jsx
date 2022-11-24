@@ -9,6 +9,7 @@ export default class Booking extends React.Component {
 
     state = {
         step: 1,
+        allSteps: 4,
         email: '',
         phone: '',
         name: '',
@@ -99,6 +100,7 @@ export default class Booking extends React.Component {
 
     render() {
         const { step } = this.state;
+        const { allSteps } = this.state;
         const { categoriesWithRooms } = this.state;
         const { email, name, lastName, phone, city, postalCode, room, category,
           subcategory, dateFrom, dateTo, adultsList, childrenList, freeList,
@@ -112,6 +114,7 @@ export default class Booking extends React.Component {
             return (
               <Client
                 step={step}
+                allSteps={allSteps}
                 nextStep={ this.nextStep }
                 handleChange={ this.handleChange }
                 values={ values }
@@ -121,6 +124,7 @@ export default class Booking extends React.Component {
             return (
               <Room
                 step={step}
+                allSteps={allSteps}
                 prevStep={ this.prevStep }
                 nextStep={ this.nextStep }
                 handleChange={ this.handleChange }
@@ -133,6 +137,7 @@ export default class Booking extends React.Component {
               return (
                 <Price 
                   step={step}
+                  allSteps={allSteps}
                   prevStep={ this.prevStep }
                   nextStep={ this.nextStep }
                   values={ values }
@@ -145,6 +150,7 @@ export default class Booking extends React.Component {
               return (
                 <Summary
                   step={step}
+                  allSteps={allSteps}
                   prevStep={ this.prevStep }
                   nextStep={ this.nextStep }
                   values={ values }

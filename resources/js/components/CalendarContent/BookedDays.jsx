@@ -12,7 +12,7 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
         if (bookings.length === 0) {
             output.push(
                 <div key={day}>
-                    <a href={newbookingLink} target="_blank" className="btn btn-sm btn-success rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                    <a href={newbookingLink} target="_blank" className="btn btn-sm btn-success rounded-0 border outline-0 p-0" data-toggle="tooltip" data-placement="bottom" title={day} style={{ width: 45 }}>
                         <div className="py-3">&nbsp;</div>
                     </a>
                 </div>
@@ -20,12 +20,11 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
         } else {
             bookings.forEach(booking => {
                 let editLink = '/booking/details/' + booking.id;
-                console.log(booking);
                 switch (booking.status) {
                     case 0:
                         output.push(
                             <div key={day}>
-                                <a href={editLink} target="_blank" className="btn btn-sm btn-warning rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-warning rounded-0 border outline-0 p-0" data-toggle="tooltip" data-placement="bottom" style={{ width: 45 }}>
                                     <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
                                 </a>
                             </div>
@@ -34,7 +33,7 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
                     case 1:
                         output.push(
                             <div key={day}>
-                                <a href={editLink} target="_blank" className="btn btn-sm btn-info rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-info rounded-0 border outline-0 p-0" data-toggle="tooltip" data-placement="bottom" style={{ width: 45 }}>
                                     <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
                                 </a>
                             </div>
@@ -43,7 +42,7 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
                     case 2:
                         output.push(
                             <div key={day}>
-                                <a href={editLink} target="_blank" className="btn btn-sm btn-primary rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-primary rounded-0 border outline-0 p-0" data-toggle="tooltip" data-placement="bottom" style={{ width: 45 }}>
                                     <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
                                 </a>
                             </div>
@@ -52,7 +51,7 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
                         case 3:
                         output.push(
                             <div key={day}>
-                                <a href={editLink} target="_blank" className="btn btn-sm btn-danger rounded-0 border outline-0 p-0" style={{ width: 45 }}>
+                                <a href={editLink} target="_blank" className="btn btn-sm btn-danger rounded-0 border outline-0 p-0" data-toggle="tooltip" data-placement="bottom" style={{ width: 45 }}>
                                     <div className="py-3" style={{ width: 45 }}>&nbsp;</div>
                                 </a>
                             </div>

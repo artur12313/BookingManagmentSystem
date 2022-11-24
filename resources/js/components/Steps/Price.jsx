@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setChildren, setFree }) => {
+const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setChildren, setFree, allSteps }) => {
 
     const [inputList, setInputList] = useState(values.freeList);
     const [adultsList, setAdultsList] = useState(values.adultsList);
@@ -112,7 +112,7 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
                     <div className="card">
                         <div className="card-header d-flex justify-content-between">
                             <h5>Podaj ilość osób oraz ich wiek</h5>
-                            <h5>Krok {step} z 4</h5>
+                            <h5>Krok {step} z {allSteps}</h5>
                         </div>
                         <div className="card-body">
                             <form>

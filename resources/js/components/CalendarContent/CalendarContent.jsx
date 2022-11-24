@@ -2,7 +2,7 @@ import React from "react";
 import CalendarContentTop from "./CalendarContentTop/CalendarContentTop";
 import BookedDays from "./BookedDays";
 
-function CalendarContent({ calendarSubcategories, calendarRooms, category, calendarBookings, daysToDisplay, actualMonth, actualYear, daysToCompare }) {
+function CalendarContent({ calendarSubcategories, calendarRooms, category, calendarBookings, daysToDisplay, actualMonth, actualYear, daysToCompare, today }) {
     return (
         <div className="card-body p-0">
             <div className="col-12 px-0">
@@ -10,7 +10,7 @@ function CalendarContent({ calendarSubcategories, calendarRooms, category, calen
                 {calendarSubcategories.filter(sub => sub.parent_id === category.id).lenght !== 0 ? (
                     calendarSubcategories.filter(sub => sub.parent_id === category.id).map(sub => (
                         <div key={sub.id}>
-                            <CalendarContentTop calendarSubcategories={sub} daysToDisplay={daysToDisplay} actualMonth={actualMonth}/>
+                            <CalendarContentTop calendarSubcategories={sub} daysToDisplay={daysToDisplay} actualMonth={actualMonth} today={today}/>
                                 {calendarRooms.filter(item => item.category_id === sub.id).map(item => (
                                     <div key={item.id} className="col-12 px-0 border-bottom d-flex">
                                         <div className="col-3 border-right px-2 py-3 d-flex align-items-center justify-content-center">
@@ -27,7 +27,7 @@ function CalendarContent({ calendarSubcategories, calendarRooms, category, calen
                     </>
                 )}
                     <>
-                        <CalendarContentTop daysToDisplay={daysToDisplay} actualMonth={actualMonth}/>
+                        <CalendarContentTop daysToDisplay={daysToDisplay} actualMonth={actualMonth} today={today}/>
                         {calendarRooms.filter(room => room.category_id === category.id).map(room => (
                             <div key={room.id} className="col-12 px-0 border-bottom d-flex">
                                 <div className="col-3 border-right px-2 py-3 d-flex align-items-center justify-content-center">

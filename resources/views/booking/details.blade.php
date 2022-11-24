@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Rezerwacja: {{$categoryName}} ({{$booking->room->category->name}}) {{$booking->room->name}}</h1>
+        <h1>Rezerwacja: {{$category ? $category->name : ' '}}{{$category ? ' (': ' '}}{{$booking->room->category->name}}{{$category ? ') ': ' '}}{{$booking->room->name}}</h1>
     </div>
 <script>
     console.log('');
@@ -20,8 +20,8 @@
         </div>
         <div className="col-md-6">
             <h5 className="text-decoration-underline">Dane rezerwacji</h5>
-            <p>Domek: {{$categoryName}}</p>
-            <p>Sekcja: {{$booking->room->category->name}}</p>
+            <p>{{$category ? "Domek: $category->name " : "Domek: ".$sectionName}}</p>
+            <p>{{$category ? "Sekcja: ".$sectionName : ' '}}</p>
             <p>Pokój: {{$booking->room->name}}</p>
             <p>Data przyjazdu: {{$booking->start_date}}</p>
             <p>Data wyjazdu: {{$booking->end_date}}</p>
@@ -33,7 +33,8 @@
     <div>
         Uwagi: {{$booking->comments ? $booking->comments : 'Brak.'}}
     </div>
-    <a class="btn btn-primary mt-2" href="{{ route('booking.show') }}">{{ __('Powrót') }}</a>
+    <a class="btn btn-primary mt-2" href="{{ route('booking.show') }}">{{ __('Lista rezerwacji') }}</a>
+    <a class="btn btn-primary mt-2" href="{{ route('home') }}">{{ __('Strona główna') }}</a>
     <a class="btn btn-success mt-2" href="{{ route('booking.edit', $booking->id) }}">{{ __('Edytuj') }}</a>
 </div>
 @endsection

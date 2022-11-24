@@ -45,6 +45,7 @@ class BookingController extends Controller
     public function edit($id)
     {
         $booking = Booking::find($id);
+        $selectedCategory = Category::find($booking->room->category->parent_id);
         $client = Client::find($booking->client_id);
         $room = Room::find($booking->room_id);
         $categories = Category::whereNull('parent_id')->get();
@@ -65,7 +66,7 @@ class BookingController extends Controller
             ];
         }
 
-        return view('booking.edit')->with(['booking' => $booking, 'client' => $client, 'categoriesWithRooms' => $categoriesWithRooms, 'room' => $room]);
+        return view('booking.edit')->with(['booking' => $booking, 'client' => $client, 'categoriesWithRooms' => $categoriesWithRooms, 'room' => $room, 'selectedCategory' => $selectedCategory]);
     }
 
     public function details($id)
@@ -73,8 +74,9 @@ class BookingController extends Controller
         $booking = Booking::find($id);
         $category = Category::find($booking->room->category->parent_id);
         $client = Client::find($booking->client_id);
+        $sectionName = $booking->room->category->name;
 
-        return view('booking.details')->with(['booking' => $booking, 'client' => $client, 'categoryName' => $category->name]);
+        return view('booking.details')->with(['booking' => $booking, 'client' => $client, 'category' => $category, 'sectionName' => $sectionName]);
     }
 
     public function destroy($id)

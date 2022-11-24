@@ -1,7 +1,7 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 
-const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handleChange, submit }) => {
+const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handleChange, submit, allSteps }) => {
     
     const [roomName, setRoomName] = useState("");
     const [categoryName, setCategoryName] = useState("");
@@ -42,6 +42,10 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                 console.log(error);
             });
     }
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     const getAdults = () => {
        var numberOfPeopleToCount = [];
@@ -110,7 +114,7 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                     <div className="card">
                         <div className="card-header d-flex justify-content-between">
                             <h5>Podsumowanie</h5>
-                            <h5>Krok {step} z 4</h5>
+                            <h5>Krok {step} z {allSteps}</h5>
                         </div>
                         <div className="card-body">
                             <div className="row">
@@ -131,7 +135,7 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                     <p>Podkategoria: {values.subcategory}</p>
                                     <p>Data przyjazdu: {values.dateFrom}</p>
                                     <p>Data wyjazdu: {values.dateTo}</p>
-                                    <p>Liczba osób objętych zniżką: {people}</p>
+                                    <p>Liczba osób objętych zniżką: {people ? people : values.numberOfPeople}</p>
                                 </div>
                             </div>
                             <hr/>
@@ -142,7 +146,6 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                             <div className="form-group">
                                                 <label htmlFor="status">Status:</label>
                                                 <select name="status" className="form-control custom-select" onChange={handleChange('status')} defaultValue={values.status}>
-                                                    <option value="">Wybierz</option>
                                                     <option value="1">Zarezerwowane</option>
                                                     <option value="2">Oczekiwanie na płatność</option>
                                                     <option value="3">Zapłacone</option>
@@ -172,7 +175,6 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                     </div>
                                 </div>
                             </div>
-                            <button className="btn btn-primary" onClick={getData}>Dane</button>
                         </div>
                         <div className="card-footer d-flex justify-content-between">
                             <button type="button" className="btn btn-primary" onClick={ Previous }>Poprzedni</button>

@@ -9,28 +9,29 @@ export default class EditBooking extends React.Component {
 
     state = {
         step: 1,
-        email: '',
-        phone: '',
-        name: '',
-        lastName: '',
-        city: '',
-        postalCode: '',
-        room: '',
-        category: '',
-        subcategory: '',
-        dateFrom: '',
-        dateTo: '',
+        allSteps: 3,
+        email: window.client.email,
+        phone: window.client.phone,
+        name: window.client.name,
+        lastName: window.client.lastName,
+        city: window.client.city,
+        postalCode: window.client.postalCode,
+        room: window.booking.room_id,
+        category: window.room.category_id,
+        subcategory: window.room.category_id,
+        dateFrom: window.booking.start_date,
+        dateTo: window.booking.end_date,
         categoriesWithRooms: window.categoriesWithRooms,
         adultsList: [{adults: "" }],
         childrenList: [{children: "" }],
         freeList: [{free: "" }],
         respMsg: '',
-        comments: '',
-        status: '',
-        price: '',
-        typeOfClient: '',
-        numberOfPeople: 0,
-        isDisabled: true,
+        comments: window.booking.comments,
+        status: window.booking.status,
+        price: window.booking.price,
+        typeOfClient: window.client.typeOfClient,
+        numberOfPeople: window.booking.numberOfPeople,
+        isDisabled: false,
       }
         
 
@@ -65,7 +66,8 @@ export default class EditBooking extends React.Component {
       }
 
       submit = () => {
-        axios.post('/api/booking/new', {
+        var url = '/api/booking/update' + window.booking.id;
+        axios.put(url, {
             email: this.state.email,
             phone: this.state.phone,
             name: this.state.name,
@@ -97,7 +99,9 @@ export default class EditBooking extends React.Component {
       }
 
     render() {
+      console.log(this.state);
         const { step } = this.state;
+        const { allSteps } = this.state;
         const { categoriesWithRooms } = this.state;
         const { email, name, lastName, phone, city, postalCode, room, category,
           subcategory, dateFrom, dateTo, adultsList, childrenList, freeList,
@@ -105,12 +109,12 @@ export default class EditBooking extends React.Component {
         const values = { email, name, lastName, phone, city, postalCode, room,
           category, subcategory, dateFrom, dateTo, adultsList, childrenList,
           freeList, isDisabled, comments, typeOfClient, price, status, numberOfPeople };
-        
         switch(step) {
           case 1: 
             return (
               <Client
                 step={step}
+                allSteps={allSteps}
                 nextStep={ this.nextStep }
                 handleChange={ this.handleChange }
                 values={ values }
@@ -120,6 +124,7 @@ export default class EditBooking extends React.Component {
             return (
               <Room
                 step={step}
+                allSteps={allSteps}
                 prevStep={ this.prevStep }
                 nextStep={ this.nextStep }
                 handleChange={ this.handleChange }
@@ -128,22 +133,11 @@ export default class EditBooking extends React.Component {
                 handleDisable={ this.handleDisable }
               />
             )
-          case 3: 
-              return (
-                <Price 
-                  step={step}
-                  prevStep={ this.prevStep }
-                  nextStep={ this.nextStep }
-                  values={ values }
-                  setAdults={ this.setAdults }
-                  setChildren={ this.setChildren }
-                  setFree={ this.setFree }
-                />
-              )
-            case 4: 
+            case 3: 
               return (
                 <Summary
                   step={step}
+                  allSteps={allSteps}
                   prevStep={ this.prevStep }
                   nextStep={ this.nextStep }
                   values={ values }
