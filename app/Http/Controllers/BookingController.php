@@ -71,9 +71,10 @@ class BookingController extends Controller
     public function details($id)
     {
         $booking = Booking::find($id);
+        $category = Category::find($booking->room->category->parent_id);
         $client = Client::find($booking->client_id);
 
-        return view('booking.details')->with(['booking' => $booking, 'client' => $client]);
+        return view('booking.details')->with(['booking' => $booking, 'client' => $client, 'categoryName' => $category->name]);
     }
 
     public function destroy($id)

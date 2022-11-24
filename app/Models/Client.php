@@ -22,4 +22,17 @@ class Client extends Model
         'typeOfClient',
     ];
 
+    public function getClientTextAttribute()
+    {
+        switch($this->typeOfClient) {
+            case 0:
+                return 'Nowy';
+            case 1:
+                return 'Stały';
+            case 2:
+                return 'Nowy';
+            default:
+                return 'Powracający';
+        }
+    }
 }
