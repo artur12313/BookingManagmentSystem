@@ -90,7 +90,6 @@ export default class EditBooking extends React.Component {
             if (response.status === 200) {
                 this.setState({ respMsg: response.data.message });
                 window.location.href = '/';
-                console.log(response.data);
             }
         })
         .catch(error => {
@@ -99,7 +98,6 @@ export default class EditBooking extends React.Component {
       }
 
     render() {
-      console.log(this.state);
         const { step } = this.state;
         const { allSteps } = this.state;
         const { categoriesWithRooms } = this.state;

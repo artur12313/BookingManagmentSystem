@@ -43,7 +43,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
         this.setState(prevState => ({ inputs: prevState.inputs.concat([newInput]) }));
     }
 
-    // handle input change
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
         const list = [...inputList];
@@ -66,7 +65,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
     };
 
 
-    // handle click event of the Remove button
     const handleRemoveClick = index => {
         const list = [...inputList];
         list.splice(index, 1);
@@ -85,7 +83,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
         setChildrenList(list);
     };
 
-    // handle click event of the Add button
     const handleAddClick = () => {
         setInputList([...inputList, { free: "" }]);
     };
@@ -98,7 +95,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
         setChildrenList([...childrenList, { children: "" }]);
     };
 
-    // on load set values from state
     useEffect(() => {
         setInputList(values.freeList);
         setAdultsList(values.adultsList);

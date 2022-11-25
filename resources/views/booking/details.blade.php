@@ -4,9 +4,6 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Rezerwacja: {{$category ? $category->name : ' '}}{{$category ? ' (': ' '}}{{$booking->room->category->name}}{{$category ? ') ': ' '}}{{$booking->room->name}}</h1>
     </div>
-<script>
-    console.log('');
-</script>
     <div class="d-flex col-md-12 mt-4 justify-content-around">
         <div className="col-md-6">
             <h5 className="text-decoration-underline">Dane klienta</h5>

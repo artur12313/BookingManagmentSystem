@@ -15,7 +15,6 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
         e.preventDefault();
         prevStep();
       }
-    console.log(values);
 
     const getData = () => {
         setCategoryName(" ");
@@ -27,7 +26,6 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                 subcategory: values.subcategory,
             })
             .then(response => {
-                console.log(response);
                 if(response.status === 200)
                 {
                     setRoomName(response.data.room.name);
