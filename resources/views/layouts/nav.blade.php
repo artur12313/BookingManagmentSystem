@@ -9,6 +9,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
+            @guest
+
+            @else
             <ul class="navbar-nav me-auto">
                 <li>
                     <a class="nav-link px-2 text-white" href="{{ route('categories.index') }}">{{ __('Domki') }}</a>
@@ -23,6 +26,7 @@
                     <a class="nav-link px-2 text-white" href="{{ route('booking.show') }}">{{ __('Lista rezerwacji') }}</a>
                 </li>
             </ul>
+            @endguest
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
