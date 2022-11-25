@@ -1,12 +1,12 @@
 export default function DayNames({dayName}) {
     switch(dayName) {
-        case 'Mon': return dayName = 'Pon';
-        case 'Tue': return dayName = 'Wto';
-        case 'Wed': return dayName = 'Śro';
-        case 'Thu': return dayName = 'Czw';
-        case 'Fri': return dayName = 'Pią';
-        case 'Sat': return dayName = 'Sob';
-        case 'Sun': return dayName = 'Nie';
+        case 0: return dayName = 'Nie';
+        case 1: return dayName = 'Pon';
+        case 2: return dayName = 'Wto';
+        case 3: return dayName = 'Śro';
+        case 4: return dayName = 'Czw';
+        case 5: return dayName = 'Pią';
+        case 6: return dayName = 'Sob';
     }
 }
         

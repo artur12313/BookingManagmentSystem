@@ -12,6 +12,7 @@ export default function Calendar() {
     const [calendarBookings, setCalendarBookings] = useState([]);
     const [monthToAdd, setMonthToAdd] = useState(1);
     const [yearToAdd, setYearToAdd] = useState(0);
+    const [calendarClients, setCalendarClients] = useState([]);
 
     useEffect(() => {
         showLoader();
@@ -23,6 +24,7 @@ export default function Calendar() {
                     setCalendatSubcategories(response.data.subcategories);
                     setCalendarRooms(response.data.rooms);
                     setCalendarBookings(response.data.bookings);
+                    setCalendarClients(response.data.clients);
 
                     setTimeout(() => {
                         hideLoader();
@@ -106,6 +108,7 @@ export default function Calendar() {
                                 actualYear={actualYear}
                                 daysToCompare={daysToCompare}
                                 today={today}
+                                calendarClients={calendarClients}
                             />
                         </div>
                     ))}

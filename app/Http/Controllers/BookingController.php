@@ -94,6 +94,7 @@ class BookingController extends Controller
 
         $bookings = Booking::all();
         $rooms = Room::all();
+        $clients = Client::all();
         $categories = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->get();
 
@@ -103,7 +104,8 @@ class BookingController extends Controller
             'bookings' => $bookings,
             'rooms' => $rooms,
             'categories' => $categories,
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'clients' => $clients
         ]);
     }
 

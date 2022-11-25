@@ -4,41 +4,35 @@ import DayNames from "../../Tools/DayNames";
 import formatDate from 'date-fns/format';
 import startOfWeek from "date-fns/startOfWeek";
 import addDays from "date-fns/addDays";
+import getDay from "date-fns/getDay";
 
-function CalendarContentTop({ calendarSubcategories, daysToDisplay, actualMonth, today }) {
+function CalendarContentTop({ calendarSubcategories, daysToDisplay, actualMonth, today, actualYear }) {
 
-    const dateFormat = "EE";
-    const todayFormatDate = formatDate(today, "dd");
+    const dateFormat = "dd-MM-yyyy";
+    const todayFormatDate = formatDate(today, dateFormat);
     const days = [];
 
-    let startDate = startOfWeek(actualMonth);
-
     daysToDisplay.map(day => {
-        if (day === todayFormatDate) {
+        if (formatDate(new Date(actualYear, actualMonth - 1, day), dateFormat) === todayFormatDate) {
            days.push(<div key={day} className="border-right">
-                <div className="d-flex flex-column text-danger justify-content-center text-center px-2 py-1" style={{ width: 45 }}>
+                <div className="d-flex flex-column text-danger justify-content-center text-sm-center px-2 py-1" style={{ width: 45 }}>
                     <div>{day}</div>
-                    <div><DayNames dayName={formatDate(addDays(startDate, day), dateFormat)} /></div>
+                    <div><DayNames dayName={getDay(new Date(actualYear, actualMonth - 1, day))}/></div>
                 </div>
             </div>)
         } else {
             days.push(<div key={day} className="border-right">
-                <div className="d-flex flex-column justify-content-center text-center px-2 py-1" style={{ width: 45 }}>
+                <div className="d-flex flex-column justify-content-center text-sm-center px-2 py-1" style={{ width: 45 }}>
                     <div>{day}</div>
-                    <div><DayNames dayName={formatDate(addDays(startDate, day), dateFormat)} /></div>
+                    <div><DayNames dayName={getDay(new Date(actualYear, actualMonth - 1, day))}/></div>
                 </div>
             </div>)
         }
     });
-
-    // for (let i = 0; i < 7; i++) {
-    //   days.push(formatDate(addDays(startDate, i), dateFormat));
-    // }
-
     return (
         <div className="border-bottom border-top col-12 d-flex px-0">
             <div className="col-3 border-right px-2 py-3">
-                <h5 className="text-danger text-uppercase font-weight-bold mb-0 text-center">{calendarSubcategories ? calendarSubcategories.name : ' '}</h5>
+                <h6 className="text-danger text-uppercase font-weight-bold mb-0 text-center">{calendarSubcategories ? calendarSubcategories.name : ' '}</h6>
             </div>
             <div className="col-9 p-0">
                 <div className="d-flex justify-content-around monthDays">
