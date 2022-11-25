@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +26,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function() {
 // Dashboard
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Users
 Route::get('/users', [UsersController::class, 'index'])->name('users.index');
