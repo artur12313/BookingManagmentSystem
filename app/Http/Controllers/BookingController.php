@@ -201,4 +201,33 @@ class BookingController extends Controller
         ]);
 
     }
+
+    public function update(Request $request, $id)
+    {
+
+        $booking = Booking::find($id);
+        $client = Client::find($booking->client_id);
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->name = $request->name;
+        $client->lastName = $request->lastName;
+        $client->city = $request->city;
+        $client->postalCode = $request->postalCode;
+        $client->typeOfClient = $request->typeOfClient;
+        $client->update();
+
+        $booking->room_id = $request->room;
+        $booking->start_date = $request->dateFrom;
+        $booking->end_date = $request->dateTo;
+        $booking->status = $request->status;
+        $booking->numberOfPeople = $request->numberOfPeople;
+        $booking->price = $request->price;
+        $booking->comments = $request->comments;
+        $booking->update();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Pomyślnie zaktualizowano rezerwację',
+        ]);
+    }
 }

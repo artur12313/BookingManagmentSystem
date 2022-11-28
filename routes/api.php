@@ -27,3 +27,4 @@ Route::post('/booking/rooms', [BookingController::class, 'getRooms'])->name('boo
 Route::post('/checkDate', [BookingController::class, 'checkDate'])->name('booking.checkDate');
 Route::post('/booking/new', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/calendar', [BookingController::class, 'getCalendar'])->name('booking.calendar');
+Route::put('/booking/update/{id}', [BookingController::class, 'update'])->name('booking.update');

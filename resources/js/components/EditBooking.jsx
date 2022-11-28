@@ -66,7 +66,7 @@ export default class EditBooking extends React.Component {
       }
 
       submit = () => {
-        var url = '/api/booking/update' + window.booking.id;
+        var url = '/api/booking/update/' + window.booking.id;
         axios.put(url, {
             email: this.state.email,
             phone: this.state.phone,
