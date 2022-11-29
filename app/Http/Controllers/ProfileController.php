@@ -41,9 +41,9 @@ class ProfileController extends Controller
         ]);
 
         $user = User::find(auth()->user()->id);
-        if(Hash::check($request->current_password, $user->password))
+        if(Hash::check(Hash::make($request->current_password), $user->password))
         {
-            $user->password = $request->password;
+            $user->password = Hash::make($request->password);
             $user->update();
             return redirect()->route('profile.index')->withSuccess(__('Hasło zaktualizowane pomyślnie.'));
         }

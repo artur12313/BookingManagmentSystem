@@ -86,6 +86,9 @@ export default function Calendar() {
                     <div>
                         <button className="btn btn-sm btn-info">&nbsp;</button> - <span>Zarezerwowane</span>
                     </div>
+                    <div>
+                        <button className="btn btn-sm btn-success">&nbsp;</button> - <span>Wolny termin</span>
+                    </div>
                 </div>
 
 
