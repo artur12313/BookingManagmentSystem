@@ -31,6 +31,7 @@ export default class Booking extends React.Component {
         price: '',
         typeOfClient: '',
         numberOfPeople: 0,
+        numberOfChildren: 0,
         isDisabled: true,
         user_id: window.user_id,
       }
@@ -104,10 +105,10 @@ export default class Booking extends React.Component {
         const { categoriesWithRooms } = this.state;
         const { email, name, lastName, phone, city, postalCode, room, category,
           subcategory, dateFrom, dateTo, adultsList, childrenList, freeList,
-          isDisabled, comments, typeOfClient, price, status, numberOfPeople } = this.state;
+          isDisabled, comments, typeOfClient, price, status, numberOfPeople, numberOfChildren } = this.state;
         const values = { email, name, lastName, phone, city, postalCode, room,
           category, subcategory, dateFrom, dateTo, adultsList, childrenList,
-          freeList, isDisabled, comments, typeOfClient, price, status, numberOfPeople };
+          freeList, isDisabled, comments, typeOfClient, price, status, numberOfPeople, numberOfChildren };
         
         switch(step) {
           case 1: 

@@ -47,6 +47,7 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
 
     const getAdults = () => {
        var numberOfPeopleToCount = [];
+       var numberOfChildrenToCount = [];
 
         values.adultsList.map((item) => {
             if(item.adults !== "")
@@ -75,6 +76,9 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                 if(age <= 2)
                 {
                     numberOfPeopleToCount.push(item.children);
+                } else if( age > 2 && age <= 9)
+                {
+                    numberOfChildrenToCount.push(item.children);
                 }
             }
         });
@@ -96,12 +100,17 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
         });
 
 
-        if(numberOfPeopleToCount.length > 0)
+        if(numberOfPeopleToCount.length > 0 || numberOfChildrenToCount.length > 0)
         {
             values.numberOfPeople = numberOfPeopleToCount.length;
+            values.numberOfChildren = numberOfChildrenToCount.length;
+            console.log('length inside if: ',numberOfChildrenToCount.length)
+            console.log('number inside if: ',values.numberOfPeople);
             return values.numberOfPeople;
         }
     }
+    console.log('children', values.numberOfChildren);
+    console.log(values);
 
     var people = getAdults();
 
@@ -133,7 +142,9 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                     <p>Podkategoria: {values.subcategory}</p>
                                     <p>Data przyjazdu: {values.dateFrom}</p>
                                     <p>Data wyjazdu: {values.dateTo}</p>
-                                    <p>Liczba osób objętych zniżką: {people ? people : values.numberOfPeople}</p>
+                                    <p>Liczba dzieci bezpłatnych: {values.numberOfPeople ? values.numberOfPeople : 0}</p>
+                                    <p>Liczba dzieci poniżej 9 lat objętych zniżką: {values.numberOfChildren ? values.numberOfChildren : 0}</p>
+                                    <p className="invisible">Liczba osób objętych zniżką: {people ? people : values.numberOfPeople}</p>
                                 </div>
                             </div>
                             <hr/>
