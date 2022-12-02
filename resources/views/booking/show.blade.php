@@ -25,7 +25,6 @@
                     <th scope="col">Rezerwacja od:</th>
                     <th scope="col">Rezerwacja do:</th>
                     <th scope="col">Status:</th>
-                    <th scope="col">Data utworzenia</th>
                     <th scope="col" class="text-center">Narzędzia</th>
                 </tr>
             </thead>
@@ -53,7 +52,6 @@
                     <td>
                         {{$item->status_text}}
                     </td>
-                    <td>{{date('d.m.Y', strtotime($item->created_at))}}</td>
                     <td class="d-flex justify-content-center">
                       <a href={{route('booking.details', $item->id)}} class="btn btn-sm btn-primary ml-2">Pokaż</a>
                     <a class="btn btn-success btn-sm ml-2" href="{{ route('booking.edit', $item->id) }}">Edytuj</a>
