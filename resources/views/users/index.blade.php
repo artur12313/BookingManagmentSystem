@@ -87,7 +87,7 @@
             </div>
             <div class="form-group">
                 <label for="phone">Telefon</label>
-                <input type="text" class="form-control phone" id="phone" name="phone" placeholder="telefon" required>
+                <input type="text" class="form-control phone" id="phone" name="phone" placeholder="telefon">
             </div>
             <div class="form-group">
                 <label for="password">Hasło</label>
@@ -147,7 +147,7 @@
             </div>
             <div class="mb-3">
                 <label for="editPhone">{{ __('Telefon') }}</label>
-                <input id="editPhone" class="form-control phone" type="text" name="phone" required />
+                <input id="editPhone" class="form-control phone" type="text" name="phone"/>
             </div>
         </div>
         <div class="modal-footer">

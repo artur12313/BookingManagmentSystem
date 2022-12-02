@@ -20,7 +20,7 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:30',
+            'phone' => 'max:30',
             'password' => 'required|string|min:8',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -40,7 +40,7 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:30',
+            'phone' => 'max:30',
         ]);
 
         $user = User::find($id);
