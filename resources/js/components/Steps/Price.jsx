@@ -1,21 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setChildren, setFree, allSteps }) => {
+const Price = ({ prevStep, nextStep, handleChange, values, step, setChildren, setFree, allSteps }) => {
 
     const [inputList, setInputList] = useState(values.freeList);
-    const [adultsList, setAdultsList] = useState(values.adultsList);
     const [childrenList, setChildrenList] = useState(values.childrenList);
 
 
 
     const Continue = e => {
-        
-        var adultsToAdd = [];
-        adultsList.map((item) => {
-            adultsToAdd.push(item);
-        });
-        setAdults(adultsToAdd);
 
         var childrenToAdd = [];
         childrenList.map((item) => {
@@ -50,13 +43,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
         setInputList(list);
     };
 
-    const handleAdultsChange = (e, index) => {
-        const { name, value } = e.target;
-        const list = [...adultsList];
-        list[index][name] = value;
-        setAdultsList(list);
-    };
-
     const handleChildrenChange = (e, index) => {
         const { name, value } = e.target;
         const list = [...childrenList];
@@ -71,12 +57,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
         setInputList(list);
     };
 
-    const handleRemoveAdultsClick = index => {
-        const list = [...adultsList];
-        list.splice(index, 1);
-        setAdultsList(list);
-    };
-
     const handleRemoveChildrenClick = index => {
         const list = [...childrenList];
         list.splice(index, 1);
@@ -86,10 +66,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
     const handleAddClick = () => {
         setInputList([...inputList, { free: "" }]);
     };
-
-    const handleAddAdultsClick = () => {
-        setAdultsList([...adultsList, { adults: "" }]);
-    };
     
     const handleAddChildrenClick = () => {
         setChildrenList([...childrenList, { children: "" }]);
@@ -97,7 +73,6 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
 
     useEffect(() => {
         setInputList(values.freeList);
-        setAdultsList(values.adultsList);
         setChildrenList(values.childrenList);
     }, []);
     var counter = 1;
@@ -113,33 +88,12 @@ const Price = ({ prevStep, nextStep, handleChange, values, step, setAdults, setC
                         <div className="card-body">
                             <form>
                                 <h5>"Pełnopłatne" osoby</h5>
-                                {adultsList.map((x, i) => {
-                                    var counter = i + 1;
-                                    return (
-                                        <div key={"adults[" + i + "]"}>
-                                            <div className="form-group row">
-                                                <label htmlFor="adults" className="col-md-4 col-form-label text-md-right">Data urodzenia {counter} osoby:</label>
-                                                <div className="col-md-5 d-flex">
-                                                    <input id={"adults[" + [i] + "]"} type="date" className="form-control" name="adults" value={x.adults} 
-                                                        onChange={e => handleAdultsChange(e, i)} defaultValue={values.adultsList.adults} />
-                                                    <div className="d-flex gap-2">
-                                                        {adultsList.length !== 1 && <button type="button"
-                                                            className="btn btn-danger bt-sm mx-2"
-                                                            onClick={() => handleRemoveAdultsClick(i)}>Usuń</button>}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-9 d-flex justify-content-end pr-1">
-                                                {adultsList.length - 1 === i && <button
-                                                    type="button"
-                                                    className="btn btn-primary bt-sm"
-                                                    onClick={handleAddAdultsClick}
-                                                >
-                                                    Dodaj</button>}
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                                <div className="form-group row">
+                                    <label htmlFor="adults" className="col-md-4 col-form-label text-md-right">Ilość osób dorosłych:</label>
+                                    <div className="col-md-5">
+                                        <input id="adults" type="number" className="form-control" name="adults" value={values.adults} onChange={handleChange('adults')}/>
+                                    </div>
+                                </div>
                                 <hr />
                                 <h5>Dzieci</h5>
                                 {childrenList.map((x, i) => {

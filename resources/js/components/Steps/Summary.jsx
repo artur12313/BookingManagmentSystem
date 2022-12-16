@@ -43,27 +43,13 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
 
     useEffect(() => {
         getData();
+        getAdults();
     }, []);
 
     const getAdults = () => {
-       var numberOfPeopleToCount = [];
-       var numberOfChildrenToCount = [];
+        var numberOfPeopleToCount = [];
+        var numberOfChildrenToCount = [];
 
-        values.adultsList.map((item) => {
-            if(item.adults !== "")
-            {
-                var date = new Date(item.adults);
-                var dob = new Date(date);
-                var month_diff = Date.now() - dob.getTime();
-                var age_dt = new Date(month_diff); 
-                var year = age_dt.getUTCFullYear();
-                var age = Math.abs(year - 1970);
-                if(age <= 2)
-                {
-                    numberOfPeopleToCount.push(item.adults);
-                }
-            }
-        });
         values.childrenList.map((item) => {
             if(item.children !== "")
             {
@@ -95,24 +81,21 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                 if(age <= 2)
                 {
                     numberOfPeopleToCount.push(item.free);
+                } else if( age > 2 && age <= 9)
+                {
+                    numberOfChildrenToCount.push(item.children);
                 }
             }
         });
 
 
-        if(numberOfPeopleToCount.length > 0 || numberOfChildrenToCount.length > 0)
+        if( numberOfPeopleToCount.length > 0 || numberOfChildrenToCount.length > 0)
         {
-            values.numberOfPeople = numberOfPeopleToCount.length;
             values.numberOfChildren = numberOfChildrenToCount.length;
-            console.log('length inside if: ',numberOfChildrenToCount.length)
-            console.log('number inside if: ',values.numberOfPeople);
-            return values.numberOfPeople;
+            values.numberOfPeople = numberOfPeopleToCount.length;
+            
         }
     }
-    console.log('children', values.numberOfChildren);
-    console.log(values);
-
-    var people = getAdults();
 
     return (
         <div className="container">
@@ -136,15 +119,13 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                 </div>
                                 <div className="col-md-6">
                                     <h5 className="text-decoration-underline">Dane rezerwacji</h5>
-                                    { subcategoryName !== "" ? (<p>Sekcja: {subcategoryName}</p>) : (null) }
                                     <p>Domek: {categoryName}</p>
                                     <p>Pokój: {roomName}</p>
-                                    <p>Podkategoria: {values.subcategory}</p>
                                     <p>Data przyjazdu: {values.dateFrom}</p>
                                     <p>Data wyjazdu: {values.dateTo}</p>
+                                    <p>Liczba osoó dorosłych: {values.adults}</p>
                                     <p>Liczba dzieci bezpłatnych: {values.numberOfPeople ? values.numberOfPeople : 0}</p>
                                     <p>Liczba dzieci poniżej 9 lat objętych zniżką: {values.numberOfChildren ? values.numberOfChildren : 0}</p>
-                                    <p className="invisible">Liczba osób objętych zniżką: {people ? people : values.numberOfPeople}</p>
                                 </div>
                             </div>
                             <hr/>
@@ -155,6 +136,7 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                             <div className="form-group">
                                                 <label htmlFor="status">Status:</label>
                                                 <select name="status" className="form-control custom-select" onChange={handleChange('status')} defaultValue={values.status}>
+                                                    <option value="">-Wybierz-</option>
                                                     <option value="1">Zarezerwowane</option>
                                                     <option value="2">Oczekiwanie na płatność</option>
                                                     <option value="3">Zapłacone</option>

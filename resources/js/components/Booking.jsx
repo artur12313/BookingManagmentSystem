@@ -22,7 +22,7 @@ export default class Booking extends React.Component {
         dateFrom: '',
         dateTo: '',
         categoriesWithRooms: window.categoriesWithRooms,
-        adultsList: [{adults: "" }],
+        adults: 0,
         childrenList: [{children: "" }],
         freeList: [{free: "" }],
         respMsg: '',
@@ -104,10 +104,10 @@ export default class Booking extends React.Component {
         const { allSteps } = this.state;
         const { categoriesWithRooms } = this.state;
         const { email, name, lastName, phone, city, postalCode, room, category,
-          subcategory, dateFrom, dateTo, adultsList, childrenList, freeList,
+          subcategory, dateFrom, dateTo, adults, childrenList, freeList,
           isDisabled, comments, typeOfClient, price, status, numberOfPeople, numberOfChildren } = this.state;
         const values = { email, name, lastName, phone, city, postalCode, room,
-          category, subcategory, dateFrom, dateTo, adultsList, childrenList,
+          category, subcategory, dateFrom, dateTo, adults, childrenList,
           freeList, isDisabled, comments, typeOfClient, price, status, numberOfPeople, numberOfChildren };
         
         switch(step) {
@@ -141,6 +141,7 @@ export default class Booking extends React.Component {
                   allSteps={allSteps}
                   prevStep={ this.prevStep }
                   nextStep={ this.nextStep }
+                  handleChange={ this.handleChange }
                   values={ values }
                   setAdults={ this.setAdults }
                   setChildren={ this.setChildren }

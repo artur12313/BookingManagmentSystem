@@ -11,14 +11,30 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
 
     useEffect(() => {
         if(daysToCompare.length == 31) {
+            // if resolution is smaller than 1920px
+            if (window.innerWidth < 1920) {
             setJustifyContent('justify-content-between');
-            setBoxWidth('40px');
+            setBoxWidth('38px');
+            } else {
+                setJustifyContent('justify-content-between');
+                setBoxWidth('40px');
+            }
         } else if(daysToCompare.length == 28) {
-            setJustifyContent('justify-content-between');
-            setBoxWidth('47px');
+            if (window.innerWidth < 1920) {
+                setJustifyContent('justify-content-between');
+                setBoxWidth('44px');
+            } else {
+                setJustifyContent('justify-content-between');
+                setBoxWidth('47px');
+            }
         } else {
+            if (window.innerWidth < 1920) {
             setJustifyContent('justify-content-around');
-            setBoxWidth('45px');
+            setBoxWidth('41px');
+            } else {
+                setJustifyContent('justify-content-around');
+                setBoxWidth('45px');
+            }
         }
     }, [daysToCompare]);
 

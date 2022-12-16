@@ -1,3 +1,13 @@
 .monthDays > div:last-child {
     border-right: 0 !important;
 }
+
+@media all and (max-width: 1920px) {
+    .text-sm-center {
+        font-size: .7rem !important;
+    }
+
+    .text-sm-center.px-2.py-1 {
+        padding: .25rem 0 !important;
+    }
+}
