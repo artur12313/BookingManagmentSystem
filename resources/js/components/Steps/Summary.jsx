@@ -123,7 +123,7 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                     <p>Pokój: {roomName}</p>
                                     <p>Data przyjazdu: {values.dateFrom}</p>
                                     <p>Data wyjazdu: {values.dateTo}</p>
-                                    <p>Liczba osoó dorosłych: {values.adults}</p>
+                                    <p>Liczba osób dorosłych: {values.adults}</p>
                                     <p>Liczba dzieci bezpłatnych: {values.numberOfPeople ? values.numberOfPeople : 0}</p>
                                     <p>Liczba dzieci poniżej 9 lat objętych zniżką: {values.numberOfChildren ? values.numberOfChildren : 0}</p>
                                 </div>

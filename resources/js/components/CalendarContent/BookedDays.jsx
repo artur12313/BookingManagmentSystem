@@ -1,40 +1,31 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actualYear, daysToCompare, calendarClients }) {
+function BookedDays(
+    { 
+        calendarBookings,
+        room,
+        daysToCompare,
+        calendarClients,
+        boxWidth,
+        setWidth,
+        setJustify,
+        justifyContent
+    }) {
 
-    const [boxWidth, setBoxWidth] = useState('45px');
-    const [justifyContent, setJustifyContent] = useState('justify-content-around');
-    let date = new Date();
 
     let output = [];
     let newbookingLink = '/booking'
 
     useEffect(() => {
         if(daysToCompare.length == 31) {
-            // if resolution is smaller than 1920px
-            if (window.innerWidth < 1920) {
-            setJustifyContent('justify-content-between');
-            setBoxWidth('38px');
-            } else {
-                setJustifyContent('justify-content-between');
-                setBoxWidth('40px');
-            }
+            setJustify('justify-content-between');
+            setWidth('38px');
         } else if(daysToCompare.length == 28) {
-            if (window.innerWidth < 1920) {
-                setJustifyContent('justify-content-between');
-                setBoxWidth('44px');
-            } else {
-                setJustifyContent('justify-content-between');
-                setBoxWidth('47px');
-            }
+                setJustify('justify-content-between');
+                setWidth('42px');
         } else {
-            if (window.innerWidth < 1920) {
-            setJustifyContent('justify-content-around');
-            setBoxWidth('41px');
-            } else {
-                setJustifyContent('justify-content-around');
-                setBoxWidth('45px');
-            }
+            setJustify('justify-content-around');
+            setWidth('39px');
         }
     }, [daysToCompare]);
 
@@ -89,7 +80,7 @@ function BookedDays({ calendarBookings, room, daysToDisplay, actualMonth, actual
     });
 
     return (
-        <div className={"col-9 px-0 monthDays d-flex " + justifyContent}>
+        <div className={"col-10 px-0 monthDays d-flex " + justifyContent}>
             {output}
         </div>
     );

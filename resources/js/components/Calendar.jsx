@@ -13,6 +13,8 @@ export default function Calendar() {
     const [monthToAdd, setMonthToAdd] = useState(1);
     const [yearToAdd, setYearToAdd] = useState(0);
     const [calendarClients, setCalendarClients] = useState([]);
+    const [justifyContent, setJustifyContent] = useState('justify-content-around');
+    const [boxWidth, setBoxWidth] = useState('45px');
 
     useEffect(() => {
         showLoader();
@@ -47,7 +49,7 @@ export default function Calendar() {
 
     const nextMonth = () => {
         if (actualMonth === 12) {
-            setMonthToAdd(-9);
+            setMonthToAdd(-10);
             setYearToAdd(yearToAdd + 1);
         } else {
             setMonthToAdd(monthToAdd + 1);
@@ -57,19 +59,26 @@ export default function Calendar() {
 
     const prevMonth = () => {
         if (actualMonth === 1) {
-            setMonthToAdd(2);
+            setMonthToAdd(1);
             setYearToAdd(yearToAdd - 1);
         } else {
             setMonthToAdd(monthToAdd - 1);
         }
     }
-
     const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
     const days = daysInMonth(actualMonth, actualYear);
     for (let i = 1; i <= days; i++) {
         var dd = String(i).padStart(2, '0');
         daysToCompare.push(actualYear + '-' + actualMonth + '-' + dd);
         daysToDisplay.push(dd);
+    }
+
+    const setWidth = (value) => {
+        setBoxWidth(value);
+    }
+
+    const setJustify = (value) => {
+        setJustifyContent(value);
     }
 
     return (
@@ -112,6 +121,10 @@ export default function Calendar() {
                                 daysToCompare={daysToCompare}
                                 today={today}
                                 calendarClients={calendarClients}
+                                boxWidth={boxWidth}
+                                setWidth={setWidth}
+                                setJustify={setJustify}
+                                justifyContent={justifyContent}
                             />
                         </div>
                     ))}
