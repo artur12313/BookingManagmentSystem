@@ -23,7 +23,7 @@ const Client = ({nextStep, handleChange, values, step, allSteps}) => {
                         <form>
                             <div className="card-body">
                                 <div className="form-group row">
-                                    <label htmlFor="name" className="col-md-4 col-form-label text-md-right">Imię</label>
+                                    <label htmlFor="name" className="col-md-4 col-form-label text-md-right">Imię <span className="text-danger">*</span></label>
                                     <div className="col-md-6">
                                         <input
                                             id="name"
@@ -37,7 +37,7 @@ const Client = ({nextStep, handleChange, values, step, allSteps}) => {
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <label htmlFor="lastName" className="col-md-4 col-form-label text-md-right">Nazwisko</label>
+                                    <label htmlFor="lastName" className="col-md-4 col-form-label text-md-right">Nazwisko <span className="text-danger">*</span></label>
                                     <div className="col-md-6">
                                         <input
                                             id="lastName"
@@ -107,7 +107,7 @@ const Client = ({nextStep, handleChange, values, step, allSteps}) => {
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <label htmlFor="typeOfClient" className="col-md-4 col-form-label text-md-right">Klient</label>
+                                    <label htmlFor="typeOfClient" className="col-md-4 col-form-label text-md-right">Klient <span className="text-danger">*</span></label>
                                     <div className="col-md-6">
                                         <select className="form-control custom-select" id="typeOfClient" name="typeOfClient" onChange={handleChange('typeOfClient')} defaultValue={values.typeOfClient}>
                                             <option value="">Wybierz</option>

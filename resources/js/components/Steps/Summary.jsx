@@ -134,7 +134,7 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
                                     <div className="row d-flex">
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <label htmlFor="status">Status:</label>
+                                                <label htmlFor="status">Status: <span className="text-danger">*</span></label>
                                                 <select name="status" className="form-control custom-select" onChange={handleChange('status')} defaultValue={values.status}>
                                                     <option value="">-Wybierz-</option>
                                                     <option value="1">Zarezerwowane</option>
