@@ -160,12 +160,8 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'phone' => 'required',
             'name' => 'required',
             'lastName' => 'required',
-            'city' => 'required',
-            'postalCode' => 'required',
             'room' => 'required',
             'dateFrom' => 'required',
             'dateTo' => 'required',

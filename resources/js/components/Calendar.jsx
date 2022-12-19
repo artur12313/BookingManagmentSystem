@@ -45,7 +45,7 @@ export default function Calendar() {
     var actualYear = today.getFullYear() + yearToAdd;
     var daysToDisplay = [];
     var daysToCompare = [];
-    
+    console.log(actualMonth);
 
     const nextMonth = () => {
         if (actualMonth === 12) {
@@ -69,7 +69,11 @@ export default function Calendar() {
     const days = daysInMonth(actualMonth, actualYear);
     for (let i = 1; i <= days; i++) {
         var dd = String(i).padStart(2, '0');
-        daysToCompare.push(actualYear + '-' + actualMonth + '-' + dd);
+        if(actualMonth < 10) {
+            daysToCompare.push(actualYear + '-' + String(actualMonth).padStart(2, '0') + '-' + dd);
+        } else {
+            daysToCompare.push(actualYear + '-' + actualMonth + '-' + dd);
+        }
         daysToDisplay.push(dd);
     }
 
