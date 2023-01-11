@@ -79,9 +79,16 @@ function BookedDays(
         }
     });
 
+    const uniqueKeys = output.reduce((unique, o) => {
+        if(!unique.some(obj => obj.key === o.key)) {
+            unique.push(o);
+        }
+        return unique;
+    },[]);
+
     return (
         <div className={"col-10 px-0 monthDays d-flex " + justifyContent}>
-            {output}
+            {uniqueKeys}
         </div>
     );
 }
