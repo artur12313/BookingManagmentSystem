@@ -67,6 +67,14 @@ export default class Booking extends React.Component {
         this.setState({ freeList: value });
       }
 
+      setNumberOfChildren = (value) => {
+        this.setState({ numberOfChildren: value });
+      }
+
+      setNumberOfPeople = (value) => {
+        this.setState({ numberOfPeople: value });
+      }
+
       submit = () => {
         axios.post('/api/booking/new', {
             email: this.state.email,
@@ -86,6 +94,8 @@ export default class Booking extends React.Component {
             typeOfClient: this.state.typeOfClient,
             numberOfPeople: this.state.numberOfPeople,
             user_id: this.state.user_id,
+            adults: this.state.adults,
+            numberOfChildren: this.state.numberOfChildren,
         })
         .then(response => {
             if (response.status === 200) {
@@ -158,6 +168,8 @@ export default class Booking extends React.Component {
                   values={ values }
                   handleChange={ this.handleChange }
                   submit={ this.submit }
+                  setNumberOfChildren={ this.setNumberOfChildren }
+                  setNumberOfPeople={ this.setNumberOfPeople }
                 />
               )
           default: 

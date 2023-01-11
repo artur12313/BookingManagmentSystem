@@ -186,6 +186,8 @@ class BookingController extends Controller
         $booking->end_date = $request->dateTo;
         $booking->status = $request->status;
         $booking->numberOfPeople = $request->numberOfPeople;
+        $booking->adults = $request->adults;
+        $booking->numberOfChildren = $request->numberOfChildren;
         $exploded = explode(',', $request->price);
         if(count($exploded) > 1) {
             $booking->price = $exploded[0] . '.' . $exploded[1];
@@ -222,6 +224,8 @@ class BookingController extends Controller
         $booking->end_date = $request->dateTo;
         $booking->status = $request->status;
         $booking->numberOfPeople = $request->numberOfPeople;
+        $booking->adults = $request->adults;
+        $booking->numberOfChildren = $request->numberOfChildren;
         $exploded = explode(',', $request->price);
         if(count($exploded) > 1) {
             $booking->price = $exploded[0] . '.' . $exploded[1];

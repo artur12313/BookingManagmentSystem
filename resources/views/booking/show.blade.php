@@ -25,6 +25,8 @@
                     <th scope="col">Rezerwacja od:</th>
                     <th scope="col">Rezerwacja do:</th>
                     <th scope="col">Status:</th>
+                    <th scope="col" style="display: none;">Data utworzenia:</th>
+                    <th scope="col" style="display: none;">Data aktualizacji:</th>
                     <th scope="col" class="text-center">Narzędzia</th>
                 </tr>
             </thead>
@@ -51,6 +53,12 @@
                     </td>
                     <td>
                         {{$item->status_text}}
+                    </td>
+                    <td style="display: none;">
+                        {{date('d-m-Y', strtotime($item->created_at))}}
+                    </td>
+                    <td style="display: none;">
+                        {{date('d-m-Y', strtotime($item->updated_at))}}
                     </td>
                     <td class="d-flex justify-content-center">
                       <a href={{route('booking.details', $item->id)}} class="btn btn-sm btn-primary ml-2">Pokaż</a>

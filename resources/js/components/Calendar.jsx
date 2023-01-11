@@ -40,12 +40,10 @@ export default function Calendar() {
     }, []);
 
     const today = new Date();
-    // var dd = String(today.getDate()).padStart(2, '0');
     var actualMonth = today.getMonth() + monthToAdd;
     var actualYear = today.getFullYear() + yearToAdd;
     var daysToDisplay = [];
     var daysToCompare = [];
-    console.log(actualMonth);
 
     const nextMonth = () => {
         if (actualMonth === 12) {

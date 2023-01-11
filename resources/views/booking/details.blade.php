@@ -14,6 +14,8 @@
             <p>Miasto: {{$client->city}}</p>
             <p>Kod pocztowy: {{$client->postalCode}}</p>
             <p>Klient: {{$client->client_text}}</p>
+            <p>Data utworzenia: {{date('d-m-Y', strtotime($client->created_at))}}</p>
+            <p>Data aktualizacji: {{date('d-m-Y', strtotime($client->updated_at))}}</p>
         </div>
         <div className="col-md-6">
             <h5 className="text-decoration-underline">Dane rezerwacji</h5>
@@ -22,9 +24,12 @@
             <p>Pokój: {{$booking->room->name}}</p>
             <p>Data przyjazdu: {{$booking->start_date}}</p>
             <p>Data wyjazdu: {{$booking->end_date}}</p>
-            <p>Liczba osób objętych zniżką: {{$booking->numberOfPeople}}</p>
+            <p>Liczba osób dorosłych: {{$booking->adults}}</p>
+            <p>Liczba dzieci bezpłatnych: {{$booking->numberOfPeople}}</p>
+            <p>Liczba dzieci poniżej 9 lat objętych zniżką: {{$booking->numberOfChildren}}</p>
             <p>Status: {{$booking->status_text}}</p>
             <p>Kwota podana przy rezerwacji: {{$booking->price ? $booking->price : ' ' }} {{$booking->price ? 'zł' : ''}}</p>
+            
         </div>
     </div>
     <div>

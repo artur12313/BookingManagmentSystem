@@ -23,6 +23,8 @@ class Booking extends Model
         'end_date',
         'status',
         'numberOfPeople',
+        'adults',
+        'numberOfChildren',
         'price',
         'comments',
     ];

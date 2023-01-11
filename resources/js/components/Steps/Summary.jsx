@@ -1,15 +1,11 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 
-const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handleChange, submit, allSteps }) => {
+const Summary = ({ prevStep, values, step, handleChange, submit, allSteps, setNumberOfChildren, setNumberOfPeople }) => {
     
     const [roomName, setRoomName] = useState("");
     const [categoryName, setCategoryName] = useState("");
     const [subcategoryName, setSubcategoryName] = useState("");
-    const Continue = e => {
-        e.preventDefault();
-        nextStep();
-      }
     
     const Previous = e => {
         e.preventDefault();
@@ -88,15 +84,13 @@ const Summary = ({ prevStep, nextStep, values, step, categoriesWithRooms, handle
             }
         });
 
-
+        
         if( numberOfPeopleToCount.length > 0 || numberOfChildrenToCount.length > 0)
         {
-            values.numberOfChildren = numberOfChildrenToCount.length;
-            values.numberOfPeople = numberOfPeopleToCount.length;
-            
+            setNumberOfChildren(numberOfChildrenToCount.length);
+            setNumberOfPeople(numberOfPeopleToCount.length);
         }
     }
-
     return (
         <div className="container">
             <div className="row justify-content-center">
