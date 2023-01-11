@@ -47,7 +47,7 @@ export default function Calendar() {
 
     const nextMonth = () => {
         if (actualMonth === 12) {
-            setMonthToAdd(-10);
+            setMonthToAdd(1);
             setYearToAdd(yearToAdd + 1);
         } else {
             setMonthToAdd(monthToAdd + 1);
@@ -57,7 +57,7 @@ export default function Calendar() {
 
     const prevMonth = () => {
         if (actualMonth === 1) {
-            setMonthToAdd(1);
+            setMonthToAdd(12);
             setYearToAdd(yearToAdd - 1);
         } else {
             setMonthToAdd(monthToAdd - 1);
