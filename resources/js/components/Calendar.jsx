@@ -100,6 +100,9 @@ export default function Calendar() {
                     <div>
                         <button className="btn btn-sm btn-success">&nbsp;</button> - <span>Wolny termin</span>
                     </div>
+                    <div>
+                        <button className="btn btn-sm btn-special2">&nbsp;</button> - <span>Dzień wyjazdu i przyjazdu</span>
+                    </div>
                 </div>
 
 

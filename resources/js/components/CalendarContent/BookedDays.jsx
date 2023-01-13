@@ -82,6 +82,13 @@ function BookedDays(
     const uniqueKeys = output.reduce((unique, o) => {
         if(!unique.some(obj => obj.key === o.key)) {
             unique.push(o);
+        }else{
+            unique = unique.filter(obj => obj.key !== o.key);
+            unique.push(
+                <div key={o.key}>
+                    <button className="btn btn-sm btn-special rounded-0 border outline-0 p-0" data-toggle="tooltip" data-placement="bottom" title={"Dzień przyjazdu i wyjazdu"} style={{ minWidth: boxWidth, width: "100%", height: "100%" }}>&nbsp;</button>
+                </div>
+            );
         }
         return unique;
     },[]);
